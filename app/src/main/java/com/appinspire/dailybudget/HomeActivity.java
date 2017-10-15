@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements ToolbarListener {
     @Override
     public void onBackPressed() {
 
-        mSimpleDialog = new SimpleDialog(this, null, getString(R.string.msg_exit),
+        mSimpleDialog = new SimpleDialog(this, "Quit App", getString(R.string.msg_exit),
                 getString(R.string.button_cancel), getString(R.string.button_ok), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
