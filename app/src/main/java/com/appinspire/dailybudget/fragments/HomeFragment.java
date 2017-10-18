@@ -52,17 +52,44 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         mHolder.card_expense.setOnTouchListener(this);
         mHolder.card_savings.setOnTouchListener(this);
         mHolder.card_purchase.setOnTouchListener(this);
-        mHolder.card_dummy.setOnTouchListener(this);
+        mHolder.card_reports.setOnTouchListener(this);
         mHolder.card_settings.setOnTouchListener(this);
-//        mHolder.card_settings.setVisibility(View.INVISIBLE);
-//        mHolder.button.setOnClickListener(this);
-//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        toolbar.setOnClickListener(this);
+        mHolder.card_reports.setOnClickListener(this);
+        mHolder.card_settings.setOnClickListener(this);
+        mHolder.card_income.setOnClickListener(this);
+        mHolder.card_expense.setOnClickListener(this);
+        mHolder.card_purchase.setOnClickListener(this);
+        mHolder.card_savings.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        ActivityUtils.startActivity(getActivity(), FrameActivity.class, HomeFragment.class.getName(), null);
+        switch (view.getId()){
+            case R.id.card_income:
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        IncomeFragment.class.getName(), null);
+                break;
+            case R.id.card_expense:
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        ExpensesFragment.class.getName(), null);
+                break;
+            case R.id.card_saving:
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        SavingsFragment.class.getName(), null);
+                break;
+            case R.id.card_purchase:
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        BigPurchasesFragment.class.getName(), null);
+                break;
+            case R.id.card_reports:
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        ReportsFragment.class.getName(), null);
+                break;
+            case R.id.card_setting:
+                ActivityUtils.startActivity(getActivity(), SimpleFrameActivity.class,
+                        SettingsFragment.class.getName(), null, AnimationEnum.VERTICAL);
+                break;
+        }
 
     }
 
@@ -70,51 +97,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch (view.getId()) {
             case R.id.card_income:
-                animate(view, motionEvent, IncomeFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_income_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_income_color),
                         ContextCompat.getColor(getActivity(), R.color.card_income_color_pressed));
                 break;
             case R.id.card_expense:
-                animate(view, motionEvent, ExpensesFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_expense_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_expense_color),
                         ContextCompat.getColor(getActivity(), R.color.card_expense_color_pressed));
                 break;
             case R.id.card_saving:
-                animate(view, motionEvent, SavingsFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_saving_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_saving_color),
                         ContextCompat.getColor(getActivity(), R.color.card_saving_color_pressed));
                 break;
             case R.id.card_purchase:
-                animate(view, motionEvent, BigPurchasesFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_purchase_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_purchase_color),
                         ContextCompat.getColor(getActivity(), R.color.card_purchase_color_pressed));
                 break;
             case R.id.card_reports:
-                animate(view, motionEvent, ReportsFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_reports_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_reports_color),
                         ContextCompat.getColor(getActivity(), R.color.card_dummy_color_pressed));
                 break;
             case R.id.card_setting:
-                animate(view, motionEvent, SettingsFragment.class.getName(),
-                        ContextCompat.getColor(getActivity(), R.color.card_setting_color),
+                animate(view, motionEvent, ContextCompat.getColor(getActivity(), R.color.card_setting_color),
                         ContextCompat.getColor(getActivity(), R.color.card_setting_color_pressed));
                 break;
         }
         return false;
     }
 
-    private void animate(View view, MotionEvent motionEvent, String fragmentName, int color, int colorPressed) {
+    private void animate(View view, MotionEvent motionEvent, int color, int colorPressed) {
         CardView cardView = (CardView) view;
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_UP:
                 cardView.setCardBackgroundColor(color);
-                if (fragmentName.contains("Settings"))
-                    ActivityUtils.startActivity(getActivity(), SimpleFrameActivity.class, fragmentName, null, AnimationEnum.VERTICAL);
-                else
-                    ActivityUtils.startActivity(getActivity(), FrameActivity.class, fragmentName, null);
-//                ActivityUtils.startActivity(getActivity(),SimpleFrameActivity.class,fragmentName,null, AnimationEnum.VERTICAL);
-//                view.setBackgroundResource(R.color.bright_overlay);
-//                mOnItemClickListener.onItemClick(view, item, position);
                 break;
             case MotionEvent.ACTION_CANCEL:
                 cardView.setCardBackgroundColor(color);
@@ -137,7 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         CardView card_savings;
         CardView card_expense;
         CardView card_purchase;
-        CardView card_dummy;
+        CardView card_reports;
         CardView card_settings;
 
         public ViewHolder(View view) {
@@ -145,7 +159,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
             card_expense = (CardView) view.findViewById(R.id.card_expense);
             card_savings = (CardView) view.findViewById(R.id.card_saving);
             card_purchase = (CardView) view.findViewById(R.id.card_purchase);
-            card_dummy = (CardView) view.findViewById(R.id.card_reports);
+            card_reports = (CardView) view.findViewById(R.id.card_reports);
             card_settings = (CardView) view.findViewById(R.id.card_setting);
         }
 
