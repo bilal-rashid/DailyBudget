@@ -96,7 +96,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="Expense"
+                    android:text="Expenses"
                     android:textColor="@color/colorCartIcon"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -224,13 +224,13 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_dummy"
+            android:id="@+id/card_reports"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/spacing_large"
             android:layout_weight="1"
             android:clickable="true"
-            app:cardBackgroundColor="@color/card_dummy_color"
+            app:cardBackgroundColor="@color/card_reports_color"
             app:cardCornerRadius="@dimen/card_radius">
 
             <android.support.constraint.ConstraintLayout
@@ -245,7 +245,7 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
-                    android:src="@drawable/icon_income"
+                    android:src="@drawable/icon_reports"
                     app:layout_constraintBottom_toTopOf="@+id/textView5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -259,7 +259,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="Income"
+                    android:text="Reports"
                     android:textColor="@color/colorCartIcon"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -307,6 +307,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:text="Settings"
+                    android:textSize="18sp"
                     android:textColor="@color/colorCartIcon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
