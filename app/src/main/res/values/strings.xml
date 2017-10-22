@@ -113,6 +113,7 @@
     <string name="temp_orders">ORDERS</string>
 
     <!-- button -->
+    <string name="button_save">Save</string>
     <string name="button_sign_in">Sign In</string>
     <string name="button_guest_sign_in">Guest User</string>
     <string name="button_sign_up">Sign Up</string>
@@ -139,4 +140,5 @@
     <string name="error_204">No Content Found</string>
     <string name="msg_order_expired">Order Expired</string>
     <string name="feedback_thanking_note">Thankyou for your feedback</string>
+    <string name="hint_income">Income (in Rupees)</string>
 </resources>

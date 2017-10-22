@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -59,6 +62,27 @@ public class AppUtils {
 //        }
     }
 
+    public static String getMonthShortName(int monthNumber)
+    {
+        String monthName="";
+
+        if(monthNumber>=0 && monthNumber<12)
+            try
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.MONTH, monthNumber);
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM");
+                simpleDateFormat.setCalendar(calendar);
+                monthName = simpleDateFormat.format(calendar.getTime());
+            }
+            catch (Exception e)
+            {
+                if(e!=null)
+                    e.printStackTrace();
+            }
+        return monthName;
+    }
     public static String getDayOfMonth(String date) {
         if (date != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -407,14 +431,14 @@ public class AppUtils {
             return false;
         }
     }
-//    public static Drawable getColorDrawable(int image,Context context) {
-//
-//        Drawable mDrawable = ContextCompat.getDrawable(context, image);
-//        mDrawable.setColorFilter(new
-//                PorterDuffColorFilter(ContextCompat.getColor(context,R.color.tracking_stpi_indicatorColor),
-//                PorterDuff.Mode.MULTIPLY));
-//        return mDrawable;
-//    }
+    public static Drawable getColorDrawable(int image, Context context) {
+
+        Drawable mDrawable = ContextCompat.getDrawable(context, image);
+        mDrawable.setColorFilter(new
+                PorterDuffColorFilter(ContextCompat.getColor(context,R.color.colorPrimaryDark),
+                PorterDuff.Mode.MULTIPLY));
+        return mDrawable;
+    }
 
 
 }

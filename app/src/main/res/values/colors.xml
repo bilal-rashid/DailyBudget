@@ -3,7 +3,7 @@
     <!--Basic-->
     <color name="colorPrimary">#90caf9</color><!-- ok Only used in styles.xml -->
     <color name="colorPrimaryDark">#5d99c6</color> <!-- Toolbar Color -->
-    <color name="colorAccent">#c3fdff</color> <!-- ok Only used in styles.xml -->
+    <color name="colorAccent">@color/colorPrimary</color> <!-- ok Only used in styles.xml -->
     <color name="colorMain">#c82209</color>
     <!--App Background-->
     <color name="colorAppBG">#e6e6e6</color>
@@ -15,7 +15,7 @@
     <!--Bars-->
     <color name="colorToolBarText">#ffffff</color>
     <color name="colorSnackBar">@color/colorPrimaryDark</color>
-    <color name="colorSnackBarText">@color/colorPrimary</color>
+    <color name="colorSnackBarText">@color/colorToolBarText</color>
     <!-- Spinner -->
     <color name="colorSpinnerText">#002256</color>
     <color name="colorSpinnerBG">#ffffff</color>
