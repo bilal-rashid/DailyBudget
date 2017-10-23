@@ -9,25 +9,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appinspire.dailybudget.R;
+import com.appinspire.dailybudget.enumerations.ExpenseEnum;
 import com.appinspire.dailybudget.enumerations.IncomeEnum;
+import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
+import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.utils.AppUtils;
 
 /**
  * Created by Bilal Rashid on 10/22/2017.
  */
 
-public class IncomeTypeSpinnerAdapter extends BaseAdapter {
+public class SpinnerAdapter extends BaseAdapter {
     Context context;
     LayoutInflater inflter;
+    int spinnerType;
 
-    public IncomeTypeSpinnerAdapter(Context applicationContext) {
+    public SpinnerAdapter(Context applicationContext, int spinnerType) {
         this.context = applicationContext;
         inflter = (LayoutInflater.from(applicationContext));
+        this.spinnerType = spinnerType;
     }
 
     @Override
     public int getCount() {
-        return IncomeEnum.values().length;
+        if(spinnerType == SpinnerTypeEnum.INCOME.getValue())
+            return IncomeEnum.values().length;
+        else if(spinnerType == SpinnerTypeEnum.EXPENSE.getValue())
+            return ExpenseEnum.values().length;
+        return 0;
     }
 
     @Override
@@ -45,9 +54,13 @@ public class IncomeTypeSpinnerAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.item_income_type_spinner, null);
         ImageView icon = (ImageView) view.findViewById(R.id.image_type_icon);
         TextView names = (TextView) view.findViewById(R.id.text_income_type);
-        icon.setImageDrawable(AppUtils.getColorDrawable(IncomeEnum.values()[i].getIconId(),context));
-        //icon.setImageResource(IncomeEnum.values()[i].getIconId());
-        names.setText(IncomeEnum.values()[i].getName());
+        if(spinnerType == SpinnerTypeEnum.EXPENSE.getValue()){
+//            icon.setImageDrawable(AppUtils.getColorDrawable(ExpenseEnum.values()[i].getIconId(), context));
+            names.setText(ExpenseEnum.values()[i].getName());
+        }else if(spinnerType == SpinnerTypeEnum.INCOME.getValue()){
+            icon.setImageDrawable(AppUtils.getColorDrawable(IncomeEnum.values()[i].getIconId(), context));
+            names.setText(IncomeEnum.values()[i].getName());
+        }
         return view;
     }
 }

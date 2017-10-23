@@ -18,23 +18,23 @@ import android.widget.DatePicker;
 
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.SpinnerAdapter;
-import com.appinspire.dailybudget.enumerations.IncomeEnum;
+import com.appinspire.dailybudget.enumerations.ExpenseEnum;
 import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
-import com.appinspire.dailybudget.models.Income;
+import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 
 import java.util.Calendar;
 
 /**
- * Created by Bilal Rashid on 10/19/2017.
+ * Created by Bilal Rashid on 10/23/2017.
  */
 
-public class AddIncomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class AddExpenseFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private ViewHolder mHolder;
-    private SpinnerAdapter mIncomeTypeAdapter;
-    private Income mIncome;
+    private SpinnerAdapter mExpenseTypeAdapter;
+    private Expense mExpense;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof ToolbarListener) {
-            ((ToolbarListener) context).setTitle("Add Income");
+            ((ToolbarListener) context).setTitle("Add Expense");
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_income, container, false);
+        return inflater.inflate(R.layout.fragment_add_expense, container, false);
     }
 
     @Override
@@ -78,11 +78,11 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
                 return true;
             }
         });
-        mIncomeTypeAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.INCOME.getValue());
-        mHolder.incomeTypeSpinner.setAdapter(mIncomeTypeAdapter);
+        mExpenseTypeAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.EXPENSE.getValue());
+        mHolder.incomeTypeSpinner.setAdapter(mExpenseTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
         mHolder.saveButton.setOnClickListener(this);
-        mIncome = new Income();
+        mExpense = new Expense();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 //        mHolder.fab_Add.setOnClickListener(this);
 
@@ -93,9 +93,9 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         public void onDateSet(DatePicker view, int year,
                               int monthOfYear, int dayOfMonth) {
             mHolder.dateEditText.setText("" + AppUtils.getMonthShortName(monthOfYear) + " " + dayOfMonth + "," + year);
-            mIncome.year=year;
-            mIncome.day=dayOfMonth;
-            mIncome.month=monthOfYear;
+            mExpense.year=year;
+            mExpense.day=dayOfMonth;
+            mExpense.month=monthOfYear;
 
         }
     };
@@ -113,7 +113,7 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
     private void submitForm(View view) {
         if (mHolder.incomeEditText.getText().toString().length() < 1) {
             mHolder.inputLayoutIncome.setErrorEnabled(true);
-            mHolder.inputLayoutIncome.setError("Income Required ");
+            mHolder.inputLayoutIncome.setError("Expense Amount Required");
             return;
         }
         mHolder.inputLayoutIncome.setError(null);
@@ -124,19 +124,19 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
             return;
         }
         try {
-            mIncome.income = Double.parseDouble(mHolder.incomeEditText.getText().toString());
+            mExpense.expense = Double.parseDouble(mHolder.incomeEditText.getText().toString());
             mHolder.inputLayoutIncome.setError(null);
             mHolder.inputLayoutIncome.setErrorEnabled(false);
         } catch (Exception e) {
             mHolder.inputLayoutIncome.setErrorEnabled(true);
-            mHolder.inputLayoutIncome.setError("Invalid Income");
+            mHolder.inputLayoutIncome.setError("Invalid Amount");
             return;
         }
         mHolder.inputLayoutDate.setError(null);
         mHolder.inputLayoutDate.setErrorEnabled(false);
-        mIncome.tag = mHolder.tagEditText.getText().toString();
-        AppUtils.showSnackBar(view,""+mIncome.day+","+","+mIncome.month
-        +","+mIncome.year);
+        mExpense.tag = mHolder.tagEditText.getText().toString();
+        AppUtils.showSnackBar(view,""+mExpense.day+","+","+mExpense.month
+                +","+mExpense.year);
         //getActivity().onBackPressed();
 
 
@@ -144,14 +144,14 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        mIncome.type = IncomeEnum.values()[i].getName();
-        mIncome.icon = IncomeEnum.values()[i].getIconId();
+        mExpense.type = ExpenseEnum.values()[i].getName();
+        mExpense.icon = ExpenseEnum.values()[i].getIconId();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        mIncome.type = IncomeEnum.values()[0].getName();
-        mIncome.icon = IncomeEnum.values()[0].getIconId();
+        mExpense.type = ExpenseEnum.values()[0].getName();
+        mExpense.icon = ExpenseEnum.values()[0].getIconId();
 
     }
 
