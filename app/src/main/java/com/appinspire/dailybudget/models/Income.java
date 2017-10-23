@@ -10,6 +10,8 @@ public class Income {
     public int icon;
     public String tag;
     public double income;
-    public String date;
+    public int year;
+    public int month;
+    public int day;
 
 }

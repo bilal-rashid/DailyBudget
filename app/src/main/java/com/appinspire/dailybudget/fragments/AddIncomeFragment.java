@@ -92,6 +92,9 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         public void onDateSet(DatePicker view, int year,
                               int monthOfYear, int dayOfMonth) {
             mHolder.dateEditText.setText("" + AppUtils.getMonthShortName(monthOfYear) + " " + dayOfMonth + "," + year);
+            mIncome.year=year;
+            mIncome.day=dayOfMonth;
+            mIncome.month=monthOfYear;
 
         }
     };
@@ -130,11 +133,10 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         }
         mHolder.inputLayoutDate.setError(null);
         mHolder.inputLayoutDate.setErrorEnabled(false);
-        mIncome.date = mHolder.dateEditText.getText().toString();
         mIncome.tag = mHolder.tagEditText.getText().toString();
-        AppUtils.showSnackBar(view,""+mIncome.income+","+mIncome.icon+","+mIncome.date
-        +","+mIncome.type);
-        getActivity().onBackPressed();
+        AppUtils.showSnackBar(view,""+mIncome.day+","+","+mIncome.month
+        +","+mIncome.year);
+        //getActivity().onBackPressed();
 
 
     }
