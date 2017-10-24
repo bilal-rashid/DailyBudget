@@ -55,7 +55,7 @@ public class SpinnerAdapter extends BaseAdapter {
         ImageView icon = (ImageView) view.findViewById(R.id.image_type_icon);
         TextView names = (TextView) view.findViewById(R.id.text_income_type);
         if(spinnerType == SpinnerTypeEnum.EXPENSE.getValue()){
-//            icon.setImageDrawable(AppUtils.getColorDrawable(ExpenseEnum.values()[i].getIconId(), context));
+            icon.setImageDrawable(AppUtils.getColorDrawable(ExpenseEnum.values()[i].getIconId(), context));
             names.setText(ExpenseEnum.values()[i].getName());
         }else if(spinnerType == SpinnerTypeEnum.INCOME.getValue()){
             icon.setImageDrawable(AppUtils.getColorDrawable(IncomeEnum.values()[i].getIconId(), context));
