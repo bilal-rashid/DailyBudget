@@ -1,6 +1,5 @@
 package com.appinspire.dailybudget.models;
 
-
 /**
  * Created by Bilal Rashid on 10/19/2017.
  */
