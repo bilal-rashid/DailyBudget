@@ -72,6 +72,17 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         Database.saveIncome(getContext(),item);
         List<Income>list = Database.getIncomeList(getContext());
         populateData(list);
+        mHolder.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && mHolder.fab_Add.getVisibility() == View.VISIBLE) {
+                    mHolder.fab_Add.hide();
+                } else if (dy < 0 && mHolder.fab_Add.getVisibility() != View.VISIBLE) {
+                    mHolder.fab_Add.show();
+                }
+            }
+        });
 
 
     }

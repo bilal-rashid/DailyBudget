@@ -45,6 +45,17 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         mHolder = new ViewHolder(view);
         mHolder.fab_Add.setOnClickListener(this);
+        mHolder.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && mHolder.fab_Add.getVisibility() == View.VISIBLE) {
+                    mHolder.fab_Add.hide();
+                } else if (dy < 0 && mHolder.fab_Add.getVisibility() != View.VISIBLE) {
+                    mHolder.fab_Add.show();
+                }
+            }
+        });
 
 
     }
