@@ -23,6 +23,7 @@ import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
+import com.appinspire.dailybudget.utils.Database;
 
 import java.util.Calendar;
 
@@ -135,9 +136,8 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         mHolder.inputLayoutDate.setError(null);
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mIncome.tag = mHolder.tagEditText.getText().toString();
-        AppUtils.showSnackBar(view,""+mIncome.day+","+","+mIncome.month
-        +","+mIncome.year);
-        //getActivity().onBackPressed();
+        Database.saveIncome(getContext(),mIncome);
+        getActivity().onBackPressed();
 
 
     }

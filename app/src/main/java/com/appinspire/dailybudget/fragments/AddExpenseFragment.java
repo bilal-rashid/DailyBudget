@@ -23,6 +23,7 @@ import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
+import com.appinspire.dailybudget.utils.Database;
 
 import java.util.Calendar;
 
@@ -135,9 +136,8 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         mHolder.inputLayoutDate.setError(null);
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mExpense.tag = mHolder.tagEditText.getText().toString();
-        AppUtils.showSnackBar(view,""+mExpense.day+","+","+mExpense.month
-                +","+mExpense.year);
-        //getActivity().onBackPressed();
+        Database.saveExpense(getContext(),mExpense);
+        getActivity().onBackPressed();
 
 
     }

@@ -56,22 +56,6 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         mHolder = new ViewHolder(view);
         mHolder.fab_Add.setOnClickListener(this);
         setupRecyclerView();
-//        List<Income> list =new ArrayList<>();
-//        for (int i=0;i<7200;i++){
-            Income item =new Income();
-            item.month=3;
-            item.icon=IncomeEnum.PROPERTY_RENT.getIconId();
-            item.income=6500000.5;
-            item.type="Business";
-            item.tag="Business with mjdkssk fdnfdjf fdjf ";
-            item.day=23;
-            item.year=2005;
-            //list.add(item);
-//
-//        }
-        Database.saveIncome(getContext(),item);
-        List<Income>list = Database.getIncomeList(getContext());
-        populateData(list);
         mHolder.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -85,6 +69,12 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         });
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        populateData(Database.getIncomeList(getContext()));
     }
 
     private void setupRecyclerView() {
