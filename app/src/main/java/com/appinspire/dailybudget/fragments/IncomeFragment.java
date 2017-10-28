@@ -61,9 +61,9 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
             Income item =new Income();
             item.month=3;
             item.icon=IncomeEnum.PROPERTY_RENT.getIconId();
-            item.income=650.20;
+            item.income=6500000.5;
             item.type="Business";
-            item.tag="tag  ";
+            item.tag="Business with mjdkssk fdnfdjf fdjf ";
             item.day=23;
             item.year=2005;
             //list.add(item);

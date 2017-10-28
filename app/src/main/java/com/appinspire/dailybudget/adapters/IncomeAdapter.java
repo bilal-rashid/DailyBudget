@@ -14,6 +14,7 @@ import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +44,13 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
         holder.incomeTypeText.setText(item.type);
         if(item.income%1==0){
             ///income is without decimals
-            holder.amountText.setText(Double.valueOf(item.income).intValue()+"");
+            DecimalFormat formatter = new DecimalFormat("#,###");
+            holder.amountText.setText(formatter.format(item.income));
         }else {
-            holder.amountText.setText(item.income+"");
+            ///income is with decimals
+            DecimalFormat formatter = new DecimalFormat("#,###.0");
+            holder.amountText.setText(formatter.format(item.income));
         }
-
         holder.currencyText.setText("RS");
         holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day+ "," + item.year);
         if(item.tag.length()<1)
@@ -100,7 +103,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
             incomeTypeText.setTypeface(regular);
             dateText.setTypeface(regular);
             tagText.setTypeface(regular);
-            amountText.setTypeface(regular);
+            amountText.setTypeface(bold);
             currencyText.setTypeface(regular);
 
         }
