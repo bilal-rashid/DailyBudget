@@ -13,4 +13,20 @@ public class Income {
     public int month;
     public int day;
 
+    @Override
+    public boolean equals(Object obj) {
+        Income income = (Income) obj;
+        if(((Income) obj).year==this.year &&
+                ((Income) obj).day==this.day &&
+                ((Income) obj).type.equals(this.type) &&
+                ((Income) obj).tag.equals(this.tag) &&
+                ((Income) obj).income==this.income &&
+                ((Income) obj).month==this.month&&
+                ((Income) obj).icon==this.icon){
+            return true;
+        }
+        return false;
+    }
+
+
 }

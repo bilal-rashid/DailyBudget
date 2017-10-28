@@ -41,7 +41,13 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
         final Income item = mItems.get(position);
         holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext()));
         holder.incomeTypeText.setText(item.type);
-        holder.amountText.setText(item.income+"");
+        if(item.income%1==0){
+            ///income is without decimals
+            holder.amountText.setText(Double.valueOf(item.income).intValue()+"");
+        }else {
+            holder.amountText.setText(item.income+"");
+        }
+
         holder.currencyText.setText("RS");
         holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day+ "," + item.year);
         if(item.tag.length()<1)

@@ -18,6 +18,7 @@ import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
+import com.appinspire.dailybudget.utils.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,30 +56,21 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         mHolder = new ViewHolder(view);
         mHolder.fab_Add.setOnClickListener(this);
         setupRecyclerView();
-        List<Income> list=new ArrayList<>();
-        Income income = new Income();
-        income.year=2014;
-        income.day=23;
-        income.month=4;
-        income.tag="";
-        income.icon= IncomeEnum.BUSINESS.getIconId();
-        income.type=IncomeEnum.BUSINESS.getName();
-        income.income=3820450;
-        list.add(income);
-        income.icon=IncomeEnum.FREELANCER.getIconId();
-        list.add(income);
-        income.icon=IncomeEnum.JOB.getIconId();
-        list.add(income);
-        income.icon=IncomeEnum.OTHER.getIconId();
-        list.add(income);
-        income.icon=IncomeEnum.BUSINESS.getIconId();
-        list.add(income);
-        income.icon=IncomeEnum.JOB.getIconId();
-        list.add(income);
-        list.add(income);
-        list.add(income);
-        list.add(income);
-        list.add(income);
+//        List<Income> list =new ArrayList<>();
+//        for (int i=0;i<7200;i++){
+            Income item =new Income();
+            item.month=3;
+            item.icon=IncomeEnum.PROPERTY_RENT.getIconId();
+            item.income=650.20;
+            item.type="Business";
+            item.tag="tag  ";
+            item.day=23;
+            item.year=2005;
+            //list.add(item);
+//
+//        }
+        Database.saveIncome(getContext(),item);
+        List<Income>list = Database.getIncomeList(getContext());
         populateData(list);
 
 

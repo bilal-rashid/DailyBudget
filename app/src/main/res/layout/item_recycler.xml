@@ -113,7 +113,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:text="RS"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/app_body_1" />
             </LinearLayout>
 

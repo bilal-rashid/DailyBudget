@@ -7,6 +7,9 @@ public class Constants {
 
     public static final String FRAGMENT_NAME = "fragment name";
     public static final String DATA = "data";
+    public static final String INCOME_LIST = "incomes";
+    public static final String EXPENSE_LIST = "expenses";
+    public static final String SAVING_LIST = "savings";
     public static final String USER = "user";
     public static final String USER_AVAILABLE = "user available";
 
