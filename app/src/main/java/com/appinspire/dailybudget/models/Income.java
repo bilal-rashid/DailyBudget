@@ -1,5 +1,7 @@
 package com.appinspire.dailybudget.models;
 
+import com.appinspire.dailybudget.enumerations.NumberComparison;
+
 /**
  * Created by Bilal Rashid on 10/19/2017.
  */
@@ -26,6 +28,26 @@ public class Income {
             return true;
         }
         return false;
+    }
+    public int compare(Income item){
+        if(item.year>this.year)
+            return NumberComparison.GREATER_THAN.getValue();
+        else if(item.year<this.year)
+            return NumberComparison.LESS_THAN.getValue();
+        else {
+            if(item.month>this.month)
+                return NumberComparison.GREATER_THAN.getValue();
+            else if(item.month<this.month)
+                return NumberComparison.LESS_THAN.getValue();
+            else {
+                if(item.day>this.day)
+                    return NumberComparison.GREATER_THAN.getValue();
+                else if(item.day<this.day)
+                    return NumberComparison.LESS_THAN.getValue();
+                else
+                    return NumberComparison.EQUAL.getValue();
+            }
+        }
     }
 
 

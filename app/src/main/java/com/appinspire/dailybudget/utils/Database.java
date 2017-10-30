@@ -25,6 +25,13 @@ public class Database {
         List<Income> list = getIncomeList(context);
         list.add(item);
         processSaving(context, item);
+        Collections.sort(list, new Comparator<Income>() {
+            @Override
+            public int compare(Income income, Income t1) {
+                return t1.compare(income);
+            }
+        });
+
         saveIncomeList(context, list);
 
     }
@@ -193,6 +200,12 @@ public class Database {
         List<Expense> list = getExpenseList(context);
         list.add(item);
         processSaving(context, item);
+        Collections.sort(list, new Comparator<Expense>() {
+            @Override
+            public int compare(Expense expense, Expense t1) {
+                return t1.compare(expense);
+            }
+        });
         saveExpenseList(context, list);
 
     }
