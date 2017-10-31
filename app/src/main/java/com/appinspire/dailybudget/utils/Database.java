@@ -47,93 +47,27 @@ public class Database {
         } else if (list.size() >= 1) {
             saving = new Saving(item.income + list.get(list.size() - 1).savings, item.year, item.month, item.day);
             if (saving.compare(list.get(list.size() - 1)) == NumberComparison.EQUAL.getValue()) {
-                Log.d("TAAAG","Income equal date");
+                Log.d("TAAAG", "Income equal date");
                 list.remove(list.size() - 1);
                 list.add(saving);
                 saveSavingList(context, list);
             } else if (saving.compare(list.get(list.size() - 1)) == NumberComparison.LESS_THAN.getValue()) {
-                Log.d("TAAAG","Income greater date");
-                list.add(saving);
-                saveSavingList(context, list);
-            }
-            else if(saving.compare(list.get(list.size()-1)) == NumberComparison.GREATER_THAN.getValue()){
-                Log.d("TAAAG","Income lesser date");
-
-
-                if(list.contains(saving)){
-                    list.get(list.size()-1).savings+=item.income;
-                    int pos=list.indexOf(saving);
-                    list.get(pos).savings+=item.income;
-                    saveSavingList(context,list);
-                }
-                else {
-                    saving.savings=item.income;
-                    list.add(saving);
-                    Collections.sort(list, new Comparator<Saving>() {
-                        @Override
-                        public int compare(Saving saving, Saving t1) {
-                            return t1.compare(saving);
-                        }
-                    });
-                    int pos_saving=list.indexOf(saving);
-                    if(pos_saving>0){
-                        int prev_item=pos_saving-1;
-                        double new_saving = list.get(prev_item).savings+item.income;
-                        list.get(pos_saving).savings=new_saving;
-                        for (int i =pos_saving+1;i<list.size();i++){
-                            list.get(i).savings+=item.income;
-                        }
-                        saveSavingList(context,list);
-
-                    }else {
-                        int next_pos=pos_saving+1;
-                        double new_saving = item.income;
-                        list.get(pos_saving).savings=new_saving;
-                        for (int i =pos_saving+1;i<list.size();i++){
-                            list.get(i).savings+=item.income;
-                        }
-                        saveSavingList(context,list);
-
-                    }
-
-                }
-            }
-
-        }
-
-    }
-
-    private static void processSaving(Context context, Expense item) {
-        List<Saving> list = getSavingList(context);
-        Saving saving;// = new Saving(item.income,item.year,item.month,item.day);
-        if (list.size() < 1) {
-            Log.d("TAAAG", "1st item");
-            saving = new Saving(-1 * item.expense, item.year, item.month, item.day);
-            list.add(saving);
-            saveSavingList(context, list);
-        } else if (list.size() >= 1) {
-            saving = new Saving(list.get(list.size() - 1).savings - item.expense, item.year, item.month, item.day);
-            if (saving.compare(list.get(list.size() - 1)) == NumberComparison.EQUAL.getValue()) {
-                Log.d("TAAAG", "equal date");
-                list.remove(list.size() - 1);
-                list.add(saving);
-                saveSavingList(context, list);
-            } else if (saving.compare(list.get(list.size() - 1)) == NumberComparison.LESS_THAN.getValue()) {
-                Log.d("TAAAG", "greater date");
+                Log.d("TAAAG", "Income greater date");
                 list.add(saving);
                 saveSavingList(context, list);
             } else if (saving.compare(list.get(list.size() - 1)) == NumberComparison.GREATER_THAN.getValue()) {
-                Log.d("TAAAG", "lesser date "+saving.day+",,,"+list.get(list.size()-1).day);
+                Log.d("TAAAG", "Income lesser date");
 
 
-                if(list.contains(saving)){
-                    list.get(list.size()-1).savings-=item.expense;
-                    int pos=list.indexOf(saving);
-                    list.get(pos).savings-=item.expense;
-                    saveSavingList(context,list);
-                }
-                else {
-                    saving.savings=item.expense;
+                if (list.contains(saving)) {
+                    int pos = list.indexOf(saving);
+                    list.get(pos).savings += item.income;
+                    for (int i = pos + 1; i < list.size(); i++) {
+                        list.get(i).savings += item.income;
+                    }
+                    saveSavingList(context, list);
+                } else {
+                    saving.savings = item.income;
                     list.add(saving);
                     Collections.sort(list, new Comparator<Saving>() {
                         @Override
@@ -141,24 +75,24 @@ public class Database {
                             return t1.compare(saving);
                         }
                     });
-                    int pos_saving=list.indexOf(saving);
-                    if(pos_saving>0){
-                        int prev_item=pos_saving-1;
-                        double new_saving = list.get(prev_item).savings-item.expense;
-                        list.get(pos_saving).savings=new_saving;
-                        for (int i =pos_saving+1;i<list.size();i++){
-                            list.get(i).savings-=item.expense;
+                    int pos_saving = list.indexOf(saving);
+                    if (pos_saving > 0) {
+                        int prev_item = pos_saving - 1;
+                        double new_saving = list.get(prev_item).savings + item.income;
+                        list.get(pos_saving).savings = new_saving;
+                        for (int i = pos_saving + 1; i < list.size(); i++) {
+                            list.get(i).savings += item.income;
                         }
-                        saveSavingList(context,list);
+                        saveSavingList(context, list);
 
-                    }else {
-                        int next_pos=pos_saving+1;
-                        double new_saving = item.expense*(-1);
-                        list.get(pos_saving).savings=new_saving;
-                        for (int i =pos_saving+1;i<list.size();i++){
-                            list.get(i).savings-=item.expense;
+                    } else {
+                        int next_pos = pos_saving + 1;
+                        double new_saving = item.income;
+                        list.get(pos_saving).savings = new_saving;
+                        for (int i = pos_saving + 1; i < list.size(); i++) {
+                            list.get(i).savings += item.income;
                         }
-                        saveSavingList(context,list);
+                        saveSavingList(context, list);
 
                     }
 
@@ -168,6 +102,7 @@ public class Database {
         }
 
     }
+
 
     public static void removeIncome(Context context, Income item) {
         List<Income> list = getIncomeList(context);
@@ -214,6 +149,73 @@ public class Database {
         List<Expense> list = getExpenseList(context);
         list.remove(item);
         saveExpenseList(context, list);
+
+    }
+
+    private static void processSaving(Context context, Expense item) {
+        List<Saving> list = getSavingList(context);
+        Saving saving;// = new Saving(item.income,item.year,item.month,item.day);
+        if (list.size() < 1) {
+            Log.d("TAAAG", "1st item");
+            saving = new Saving(-1 * item.expense, item.year, item.month, item.day);
+            list.add(saving);
+            saveSavingList(context, list);
+        } else if (list.size() >= 1) {
+            saving = new Saving(list.get(list.size() - 1).savings - item.expense, item.year, item.month, item.day);
+            if (saving.compare(list.get(list.size() - 1)) == NumberComparison.EQUAL.getValue()) {
+                Log.d("TAAAG", "equal date");
+                list.remove(list.size() - 1);
+                list.add(saving);
+                saveSavingList(context, list);
+            } else if (saving.compare(list.get(list.size() - 1)) == NumberComparison.LESS_THAN.getValue()) {
+                Log.d("TAAAG", "greater date");
+                list.add(saving);
+                saveSavingList(context, list);
+            } else if (saving.compare(list.get(list.size() - 1)) == NumberComparison.GREATER_THAN.getValue()) {
+                Log.d("TAAAG", "lesser date " + saving.day + ",,," + list.get(list.size() - 1).day);
+
+
+                if (list.contains(saving)) {
+                    int pos = list.indexOf(saving);
+                    list.get(pos).savings -= item.expense;
+                    for (int i = pos + 1; i < list.size(); i++) {
+                        list.get(i).savings -= item.expense;
+                    }
+                    saveSavingList(context, list);
+                } else {
+                    saving.savings = item.expense;
+                    list.add(saving);
+                    Collections.sort(list, new Comparator<Saving>() {
+                        @Override
+                        public int compare(Saving saving, Saving t1) {
+                            return t1.compare(saving);
+                        }
+                    });
+                    int pos_saving = list.indexOf(saving);
+                    if (pos_saving > 0) {
+                        int prev_item = pos_saving - 1;
+                        double new_saving = list.get(prev_item).savings - item.expense;
+                        list.get(pos_saving).savings = new_saving;
+                        for (int i = pos_saving + 1; i < list.size(); i++) {
+                            list.get(i).savings -= item.expense;
+                        }
+                        saveSavingList(context, list);
+
+                    } else {
+                        int next_pos = pos_saving + 1;
+                        double new_saving = item.expense * (-1);
+                        list.get(pos_saving).savings = new_saving;
+                        for (int i = pos_saving + 1; i < list.size(); i++) {
+                            list.get(i).savings -= item.expense;
+                        }
+                        saveSavingList(context, list);
+
+                    }
+
+                }
+            }
+
+        }
 
     }
 
