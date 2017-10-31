@@ -107,8 +107,19 @@ public class Database {
     public static void removeIncome(Context context, Income item) {
         List<Income> list = getIncomeList(context);
         list.remove(item);
+        processRemoveIncome(context, item);
         saveIncomeList(context, list);
 
+    }
+
+    private static void processRemoveIncome(Context context, Income item) {
+        List<Saving> list = getSavingList(context);
+        Saving saving = new Saving(item.income, item.year, item.month, item.day);
+        int pos = list.indexOf(saving);
+        for (int i = pos; i < list.size(); i++) {
+            list.get(i).savings -= item.income;
+        }
+        saveSavingList(context, list);
     }
 
     public static void saveIncomeList(Context context, List<Income> items) {
@@ -148,8 +159,19 @@ public class Database {
     public static void removeExpense(Context context, Expense item) {
         List<Expense> list = getExpenseList(context);
         list.remove(item);
+        processRemoveExpense(context, item);
         saveExpenseList(context, list);
 
+    }
+
+    private static void processRemoveExpense(Context context, Expense item) {
+        List<Saving> list = getSavingList(context);
+        Saving saving = new Saving(item.expense, item.year, item.month, item.day);
+        int pos = list.indexOf(saving);
+        for (int i = pos; i < list.size(); i++) {
+            list.get(i).savings += item.expense;
+        }
+        saveSavingList(context, list);
     }
 
     private static void processSaving(Context context, Expense item) {
