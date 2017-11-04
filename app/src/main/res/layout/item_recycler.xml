@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/spacing_small_m"
     android:layout_marginRight="@dimen/spacing_small_m"
     android:layout_marginTop="@dimen/spacing_small_m"
-    card_view:cardCornerRadius="@dimen/spacing_medium"
-    card_view:cardUseCompatPadding="true">
+    app:cardCornerRadius="@dimen/spacing_small_m">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
