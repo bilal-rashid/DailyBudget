@@ -79,13 +79,15 @@
                 android:layout_marginBottom="@dimen/spacing_small_m"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:id="@+id/layout_tag"
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -99,21 +101,21 @@
                         android:text="jklkjj refewer fdfd dffdffd f f f f f f f f f f f f ff " />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.1"
-                    android:gravity="right"
-                    android:layout_height="wrap_content">
+                    android:gravity="right">
+
                     <TextView
                         android:id="@+id/text_currency"
-                        android:text="RS"
-                        android:layout_marginEnd="@dimen/spacing_medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/app_body_1"/>
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:text="RS"
+                        android:textSize="@dimen/app_body_1" />
                 </LinearLayout>
-
-
 
 
             </LinearLayout>
