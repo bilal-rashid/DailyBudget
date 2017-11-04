@@ -431,12 +431,18 @@ public class AppUtils {
             return false;
         }
     }
-    public static Drawable getColorDrawable(int image, Context context) {
+    public static Drawable getColorDrawable(int image, Context context,boolean isWhite) {
 
         Drawable mDrawable = ContextCompat.getDrawable(context, image);
-        mDrawable.setColorFilter(new
-                PorterDuffColorFilter(ContextCompat.getColor(context,R.color.colorPrimaryDark),
-                PorterDuff.Mode.MULTIPLY));
+        if(isWhite) {
+            mDrawable.setColorFilter(new
+                    PorterDuffColorFilter(ContextCompat.getColor(context, R.color.colorLoader),
+                    PorterDuff.Mode.MULTIPLY));
+        }else {
+            mDrawable.setColorFilter(new
+                    PorterDuffColorFilter(ContextCompat.getColor(context, R.color.colorPrimaryDark),
+                    PorterDuff.Mode.MULTIPLY));
+        }
         return mDrawable;
     }
 

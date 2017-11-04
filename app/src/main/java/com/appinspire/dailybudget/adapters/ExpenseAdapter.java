@@ -40,7 +40,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Expense item = mItems.get(position);
-        holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext()));
+        holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext(),true));
         holder.incomeTypeText.setText(item.type);
         if(item.expense%1==0){
             ///income is without decimals
@@ -54,7 +54,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         holder.currencyText.setText("RS");
         holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day+ "," + item.year);
         if(item.tag.length()<1)
-            holder.tagLayout.setVisibility(View.INVISIBLE);
+            holder.tagLayout.setVisibility(View.GONE);
         else {
             holder.tagLayout.setVisibility(View.VISIBLE);
             holder.tagText.setText(item.tag);
