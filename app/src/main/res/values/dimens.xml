@@ -17,7 +17,7 @@
     <dimen name="app_display_4">112sp</dimen>
     <dimen name="app_display_3">56sp</dimen>
     <dimen name="app_display_2">45sp</dimen>
-    <dimen name="app_display_1">34sp</dimen>
+    <dimen name="app_display_1">30sp</dimen>
     <dimen name="app_headline">24sp</dimen>
     <dimen name="app_title">21sp</dimen>
     <dimen name="app_title_small">19sp</dimen>

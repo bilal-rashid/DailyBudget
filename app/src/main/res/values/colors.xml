@@ -6,7 +6,7 @@
     <color name="colorAccent">@color/colorPrimary</color> <!-- ok Only used in styles.xml -->
     <color name="colorMain">#c82209</color>
     <!--App Background-->
-    <color name="colorAppBG">#e6e6e6</color>
+    <color name="colorAppBG">#f5f5f5</color>
     <color name="colorDividerLine">@color/colorMain</color>
     <!--Tabs-->
     <color name="colorTabs">#bababa</color>

@@ -22,14 +22,15 @@ import java.util.List;
  * Created by Bilal Rashid on 10/28/2017.
  */
 
-public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder>{
+public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
     private List<Expense> mItems = new ArrayList<>();
     OnItemClickListener mItemclickListener;
 
-    public ExpenseAdapter(OnItemClickListener onItemClickListener){
+    public ExpenseAdapter(OnItemClickListener onItemClickListener) {
         this.mItemclickListener = onItemClickListener;
 
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext())
@@ -40,20 +41,20 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Expense item = mItems.get(position);
-        holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext(),true));
+        holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext(), true));
         holder.incomeTypeText.setText(item.type);
-        if(item.expense%1==0){
+        if (item.expense % 1 == 0) {
             ///income is without decimals
             DecimalFormat formatter = new DecimalFormat("#,###");
             holder.amountText.setText(formatter.format(item.expense));
-        }else {
+        } else {
             ///income is with decimals
             DecimalFormat formatter = new DecimalFormat("#,###.0");
             holder.amountText.setText(formatter.format(item.expense));
         }
         holder.currencyText.setText("RS");
-        holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day+ "," + item.year);
-        if(item.tag.length()<1)
+        holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day + "," + item.year);
+        if (item.tag.length() < 1)
             holder.tagLayout.setVisibility(View.GONE);
         else {
             holder.tagLayout.setVisibility(View.VISIBLE);
@@ -69,10 +70,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     public List<Expense> getItems() {
         return mItems;
     }
+
     @Override
     public int getItemCount() {
         return (mItems != null ? mItems.size() : 0);
     }
+
     public void addAll(List<Expense> collection) {
         mItems.clear();
         if (collection != null)
@@ -89,15 +92,15 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         TextView amountText;
         TextView currencyText;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
             iconImage = (ImageView) view.findViewById(R.id.image_icon);
-            incomeTypeText= (TextView)view.findViewById(R.id.text_type);
-            dateText = (TextView)view.findViewById(R.id.text_date);
-            tagText = (TextView)view.findViewById(R.id.text_tag);
-            tagLayout= (LinearLayout) view.findViewById(R.id.layout_tag);
-            amountText = (TextView)view.findViewById(R.id.text_amount);
-            currencyText = (TextView)view.findViewById(R.id.text_currency);
+            incomeTypeText = (TextView) view.findViewById(R.id.text_type);
+            dateText = (TextView) view.findViewById(R.id.text_date);
+            tagText = (TextView) view.findViewById(R.id.text_tag);
+            tagLayout = (LinearLayout) view.findViewById(R.id.layout_tag);
+            amountText = (TextView) view.findViewById(R.id.text_amount);
+            currencyText = (TextView) view.findViewById(R.id.text_currency);
             Typeface regular = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoRegular.ttf");
             Typeface bold = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoBold.ttf");
             incomeTypeText.setTypeface(regular);

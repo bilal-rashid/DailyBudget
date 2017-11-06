@@ -1,19 +1,25 @@
 package com.appinspire.dailybudget.fragments;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.models.Saving;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
+import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
 import com.appinspire.dailybudget.utils.GsonUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -22,6 +28,7 @@ import java.util.List;
 
 public class SavingsFragment extends Fragment implements View.OnClickListener{
     private ViewHolder mHolder;
+    Saving mSavings;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,17 +44,28 @@ public class SavingsFragment extends Fragment implements View.OnClickListener{
         }
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_income, container, false);
+        return inflater.inflate(R.layout.fragment_savings, container, false);
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mHolder = new ViewHolder(view);
         List<Saving> list = Database.getSavingList(getContext());
-        for(int i=0;i<list.size();i++){
-            Log.d("TAAAG p",i+"");
-            Log.d("TAAAG",""+ GsonUtils.toJson(list.get(i)));
-
+        if(list.size()<1) {
+            mHolder.savingsLayout.setVisibility(View.GONE);
+            mHolder.errorLayout.setVisibility(View.VISIBLE);
+        }else {
+            mHolder.savingsLayout.setVisibility(View.VISIBLE);
+            mHolder.errorLayout.setVisibility(View.GONE);
+            mSavings = list.get(list.size() - 1);
+            mHolder.date.setText("" + AppUtils.getMonthShortName(mSavings.month) + " " + mSavings.day + "," + mSavings.year);
+            if (mSavings.savings % 1 == 0) {
+                DecimalFormat formatter = new DecimalFormat("#,###");
+                mHolder.savings.setText("Rs " + formatter.format(mSavings.savings));
+            } else {
+                DecimalFormat formatter = new DecimalFormat("#,###.0");
+                mHolder.savings.setText("Rs " + formatter.format(mSavings.savings));
+            }
         }
     }
     @Override
@@ -56,8 +74,22 @@ public class SavingsFragment extends Fragment implements View.OnClickListener{
     }
 
     public static class ViewHolder {
+        TextView date,savings;
+        RecyclerView historyRecycler;
+        LinearLayout errorLayout,savingsLayout;
 
         public ViewHolder(View view) {
+            Typeface regular = Typeface.createFromAsset(view.getContext().getAssets(), "RobotoRegular.ttf");
+            Typeface bold = Typeface.createFromAsset(view.getContext().getAssets(), "RobotoBold.ttf");
+            date = (TextView) view.findViewById(R.id.textview_date);
+            savings = (TextView) view.findViewById(R.id.textview_total_savings);
+            historyRecycler = (RecyclerView) view.findViewById(R.id.recycler_history);
+            savings.setTypeface(regular);
+            date.setTypeface(regular);
+            errorLayout = view.findViewById(R.id.error_savings);
+            savingsLayout= view.findViewById(R.id.savings_layout);
+
+
         }
 
     }
