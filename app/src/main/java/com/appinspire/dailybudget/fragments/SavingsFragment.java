@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +65,9 @@ public class SavingsFragment extends Fragment implements View.OnClickListener{
             } else {
                 DecimalFormat formatter = new DecimalFormat("#,###.0");
                 mHolder.savings.setText("Rs " + formatter.format(mSavings.savings));
+            }
+            if(mSavings.savings < 0){
+                mHolder.savings.setTextColor(ContextCompat.getColor(getContext(),R.color.card_expense_color));
             }
         }
     }

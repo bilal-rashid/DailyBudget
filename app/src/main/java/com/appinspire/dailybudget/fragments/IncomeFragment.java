@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.appinspire.dailybudget.FrameActivity;
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.IncomeAdapter;
-import com.appinspire.dailybudget.enumerations.IncomeEnum;
 import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
