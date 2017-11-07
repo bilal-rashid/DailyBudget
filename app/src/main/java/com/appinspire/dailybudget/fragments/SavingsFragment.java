@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appinspire.dailybudget.R;
+import com.appinspire.dailybudget.adapters.HistoryAdapter;
 import com.appinspire.dailybudget.models.Saving;
+import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
@@ -26,9 +29,10 @@ import java.util.List;
  * Created by Bilal Rashid on 10/16/2017.
  */
 
-public class SavingsFragment extends Fragment implements View.OnClickListener{
+public class SavingsFragment extends Fragment implements View.OnClickListener,OnItemClickListener{
     private ViewHolder mHolder;
     Saving mSavings;
+    private HistoryAdapter mHistoryAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,9 +74,21 @@ public class SavingsFragment extends Fragment implements View.OnClickListener{
                 mHolder.savings.setTextColor(ContextCompat.getColor(getContext(),R.color.card_expense_color));
             }
         }
+        setupRecyclerView();
+    }
+    private void setupRecyclerView() {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mHolder.historyRecycler.setLayoutManager(mLayoutManager);
+        mHistoryAdapter = new HistoryAdapter(this);
+        mHolder.historyRecycler.setAdapter(mHistoryAdapter);
     }
     @Override
     public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onItemClick(View view, Object data, int position) {
 
     }
 
