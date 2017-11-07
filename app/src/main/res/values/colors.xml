@@ -83,7 +83,7 @@
     <!-- Welcome Screen -->
     <color name="colorContinueAsGuest">#434241</color>
     <!-- Profile Screen -->
-    <color name="colorProfileDivider">#bababa</color>
+    <color name="colorProfileDivider">#d6d5d5</color>
     <color name="colorProfileHeadingText">#ffffff</color>
     <color name="colorProfileText">#000000</color>
     <color name="colorProfileIcon">#000000</color>
