@@ -10,7 +10,9 @@ import android.widget.TextView;
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.models.Saving;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
+import com.appinspire.dailybudget.utils.AppUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        final Saving item = mItems.get(position);
+        if (item.savings % 1 == 0) {
+            ///income is without decimals
+            DecimalFormat formatter = new DecimalFormat("#,###");
+            holder.total_savings_text.setText("Rs "+formatter.format(item.savings));
+        } else {
+            ///income is with decimals
+            DecimalFormat formatter = new DecimalFormat("#,###.0");
+            holder.total_savings_text.setText("Rs "+formatter.format(item.savings));
+        }
+        holder.start_year_text.setText(item.year+"");
+        holder.start_day_text.setText(item.day+"");
+        holder.start_month_text.setText(AppUtils.getMonthShortName(item.month)+"");
 
     }
     public Saving getItem(int position) {
@@ -48,7 +63,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 10;
+        return (mItems != null ? mItems.size() : 0);
     }
     public void addAll(List<Saving> collection) {
         mItems.clear();
@@ -58,28 +73,30 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView incomeTypeText;
-        TextView dateText;
-        TextView tagText;
-        TextView amountText;
-        TextView currencyText;
+        TextView start_day_text;
+        TextView start_month_text;
+        TextView start_year_text;
+        TextView end_day_text;
+        TextView end_month_text;
+        TextView end_year_text;
+        TextView total_savings_text;
 
         public ViewHolder(View view) {
             super(view);
-//            iconImage = (ImageView) view.findViewById(R.id.image_icon);
-//            incomeTypeText = (TextView) view.findViewById(R.id.text_type);
-//            dateText = (TextView) view.findViewById(R.id.text_date);
-//            tagText = (TextView) view.findViewById(R.id.text_tag);
-//            tagLayout = (LinearLayout) view.findViewById(R.id.layout_tag);
-//            amountText = (TextView) view.findViewById(R.id.text_amount);
-//            currencyText = (TextView) view.findViewById(R.id.text_currency);
-//            Typeface regular = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoRegular.ttf");
-//            Typeface bold = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoBold.ttf");
-//            incomeTypeText.setTypeface(regular);
-//            dateText.setTypeface(regular);
-//            tagText.setTypeface(regular);
-//            amountText.setTypeface(bold);
-//            currencyText.setTypeface(regular);
+            Typeface regular = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoRegular.ttf");
+            Typeface bold = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoBold.ttf");
+            start_day_text = (TextView) view.findViewById(R.id.start_day);
+            start_month_text= (TextView) view.findViewById(R.id.start_month);
+            start_year_text= (TextView) view.findViewById(R.id.start_year);
+            end_day_text= (TextView) view.findViewById(R.id.text_end_day);
+            end_month_text= (TextView) view.findViewById(R.id.text_end_month);
+            end_year_text= (TextView) view.findViewById(R.id.text_end_year);
+            total_savings_text= (TextView) view.findViewById(R.id.textview_total_savings);
+            (view.findViewById(R.id.end_layout)).setVisibility(View.GONE);
+            total_savings_text.setTypeface(regular);
+            start_day_text.setTypeface(bold);
+            start_month_text.setTypeface(bold);
+            start_year_text.setTypeface(bold);
 
         }
 

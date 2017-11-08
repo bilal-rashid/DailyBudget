@@ -20,9 +20,9 @@ import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
-import com.appinspire.dailybudget.utils.GsonUtils;
 
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -82,9 +82,29 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
         mHistoryAdapter = new HistoryAdapter(this);
         mHolder.historyRecycler.setAdapter(mHistoryAdapter);
     }
+    private void populateData(List<Saving> objects) {
+        mHistoryAdapter.addAll(objects);
+        if (objects == null || objects.size() <= 0) {
+//            mHolder.sErrorText.setText("No Stores");
+//            mHolder.sErrorContainer.setVisibility(View.VISIBLE);
+        } else {
+//            mHolder.sErrorContainer.setVisibility(View.GONE);
+        }
+    }
     @Override
     public void onClick(View view) {
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<Saving> list = Database.getSavingList(getContext());
+        if(list.size()>0) {
+            Collections.reverse(list);
+            list.remove(0);
+            if(list.size()>0)
+                populateData(list);
+        }
     }
 
     @Override
