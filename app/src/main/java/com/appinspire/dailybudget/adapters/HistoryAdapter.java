@@ -42,11 +42,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         if (item.savings % 1 == 0) {
             ///income is without decimals
             DecimalFormat formatter = new DecimalFormat("#,###");
-            holder.total_savings_text.setText("Rs "+formatter.format(item.savings));
+            holder.total_savings_text.setText(formatter.format(item.savings));
         } else {
             ///income is with decimals
             DecimalFormat formatter = new DecimalFormat("#,###.0");
-            holder.total_savings_text.setText("Rs "+formatter.format(item.savings));
+            holder.total_savings_text.setText(formatter.format(item.savings));
         }
         holder.start_year_text.setText(item.year+"");
         holder.start_day_text.setText(item.day+"");

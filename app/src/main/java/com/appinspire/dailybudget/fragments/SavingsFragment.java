@@ -65,10 +65,10 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             mHolder.date.setText("" + AppUtils.getMonthShortName(mSavings.month) + " " + mSavings.day + "," + mSavings.year);
             if (mSavings.savings % 1 == 0) {
                 DecimalFormat formatter = new DecimalFormat("#,###");
-                mHolder.savings.setText("Rs " + formatter.format(mSavings.savings));
+                mHolder.savings.setText(formatter.format(mSavings.savings));
             } else {
                 DecimalFormat formatter = new DecimalFormat("#,###.0");
-                mHolder.savings.setText("Rs " + formatter.format(mSavings.savings));
+                mHolder.savings.setText(formatter.format(mSavings.savings));
             }
             if(mSavings.savings < 0){
                 mHolder.savings.setTextColor(ContextCompat.getColor(getContext(),R.color.card_expense_color));

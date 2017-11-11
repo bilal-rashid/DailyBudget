@@ -74,13 +74,20 @@
 
                     <TextView
                         android:id="@+id/textview_total_savings"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/spacing_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_small"
                         android:gravity="center"
-                        android:text="$ 22,5000"
+                        android:text="22,5000"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/app_display_1" />
+                    <TextView
+                        android:id="@+id/savings_currency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PKR"
+                        android:textSize="@dimen/app_subheading" />
 
                 </LinearLayout>
 

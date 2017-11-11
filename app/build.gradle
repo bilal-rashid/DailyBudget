@@ -33,4 +33,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile "com.android.support:support-v4:$supportLib"
     compile "com.android.support:design:$supportLib"
+    compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 }

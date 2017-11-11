@@ -51,7 +51,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
             DecimalFormat formatter = new DecimalFormat("#,###.0");
             holder.amountText.setText(formatter.format(item.income));
         }
-        holder.currencyText.setText("RS");
+        holder.currencyText.setText("PKR");
         holder.dateText.setText("" + AppUtils.getMonthShortName(item.month) + " " + item.day+ "," + item.year);
         if(item.tag.length()<1)
             holder.tagLayout.setVisibility(View.GONE);

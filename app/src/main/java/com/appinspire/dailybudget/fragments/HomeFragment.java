@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,11 @@ import com.appinspire.dailybudget.SimpleFrameActivity;
 import com.appinspire.dailybudget.enumerations.AnimationEnum;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
+
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Bilal Rashid on 10/10/2017.
@@ -43,6 +49,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+    Set<Currency> availableCurrenciesSet;
+    List<Currency> availableCurrenciesList;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -60,6 +68,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         mHolder.card_expense.setOnClickListener(this);
         mHolder.card_purchase.setOnClickListener(this);
         mHolder.card_savings.setOnClickListener(this);
+        availableCurrenciesSet =
+                Currency.getAvailableCurrencies();
+        availableCurrenciesList = new ArrayList<Currency>(availableCurrenciesSet);
+//        for(Currency item:availableCurrenciesList){
+////            Log.d("TAAAG",item.toString());
+//        }
+        Log.d("TAAAG",availableCurrenciesList.size()+"");
+
+
     }
 
     @Override
