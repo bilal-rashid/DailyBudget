@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#5d99c6</color> <!-- Toolbar Color -->
     <color name="colorAccent">@color/colorPrimary</color> <!-- ok Only used in styles.xml -->
     <color name="colorMain">#c82209</color>
+    <color name="colorWhite">#ffffff</color>
     <!--App Background-->
     <color name="colorAppBG">#f5f5f5</color>
     <color name="colorDividerLine">@color/colorMain</color>
