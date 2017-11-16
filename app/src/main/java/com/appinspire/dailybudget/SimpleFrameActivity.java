@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
+import com.appinspire.dailybudget.utils.ActivityUtils;
 import com.appinspire.dailybudget.utils.Constants;
 
 /**
@@ -13,7 +15,7 @@ import com.appinspire.dailybudget.utils.Constants;
  */
 
 public class SimpleFrameActivity extends AppCompatActivity {
-
+    private Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,10 @@ public class SimpleFrameActivity extends AppCompatActivity {
                 fragment.setArguments(bundle);
             addFragment(fragment);
         }
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Settings");
+        ActivityUtils.centerToolbarTitle(mToolbar,false);
+        setSupportActionBar(mToolbar);
     }
 
     public void addFragment(final Fragment fragment) {
