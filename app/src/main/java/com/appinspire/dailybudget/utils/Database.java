@@ -289,4 +289,11 @@ public class Database {
         return new Gson().fromJson(PrefUtils.getString(context, Constants.SAVING_LIST), new TypeToken<List<Saving>>() {
         }.getType());
     }
+    ////////////currency//////////////////
+    public static void setCurrency(Context context,int position){
+        PrefUtils.persistInt(context,Constants.CURRENCY,position);
+    }
+    public static int getCurrency(Context context){
+        return PrefUtils.getInt(context,Constants.CURRENCY,0);
+    }
 }

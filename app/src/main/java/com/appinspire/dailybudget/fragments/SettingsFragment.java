@@ -14,6 +14,7 @@ import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.SpinnerAdapter;
 import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
+import com.appinspire.dailybudget.utils.Database;
 
 /**
  * Created by Bilal Rashid on 10/16/2017.
@@ -46,9 +47,19 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
         mCurrencyAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.CURRENCY.getValue());
         mHolder.spinner.setAdapter(mCurrencyAdapter);
         mHolder.spinner.setOnItemSelectedListener(this);
+        mHolder.spinner.setSelection(Database.getCurrency(getContext()));
+        mHolder.save.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button_save:
+                Database.setCurrency(getContext(),mHolder.spinner.getSelectedItemPosition());
+                getActivity().onBackPressed();
+                break;
+            case R.id.button_reset:
+                break;
+        }
 
     }
 
