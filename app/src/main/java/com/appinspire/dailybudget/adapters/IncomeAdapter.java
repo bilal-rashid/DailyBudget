@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final Income item = mItems.get(position);
         holder.iconImage.setImageDrawable(AppUtils.getColorDrawable(item.icon, holder.itemView.getContext(),true));
         holder.incomeTypeText.setText(item.type);
@@ -59,6 +60,12 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
             holder.tagLayout.setVisibility(View.VISIBLE);
             holder.tagText.setText(item.tag);
         }
+        holder.delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mItemclickListener.onItemClick(view,item,position);
+            }
+        });
 
     }
 
@@ -88,6 +95,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
         LinearLayout tagLayout;
         TextView amountText;
         TextView currencyText;
+        Button delButton;
 
         public ViewHolder(View view){
             super(view);
@@ -98,6 +106,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
             tagLayout= (LinearLayout) view.findViewById(R.id.layout_tag);
             amountText = (TextView)view.findViewById(R.id.text_amount);
             currencyText = (TextView)view.findViewById(R.id.text_currency);
+            delButton = (Button) view.findViewById(R.id.button_del);
             Typeface regular = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoRegular.ttf");
             Typeface bold = Typeface.createFromAsset(itemView.getContext().getAssets(), "RobotoBold.ttf");
             incomeTypeText.setTypeface(regular);

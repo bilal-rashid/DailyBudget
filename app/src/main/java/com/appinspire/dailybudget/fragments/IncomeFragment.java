@@ -19,7 +19,6 @@ import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
 import com.appinspire.dailybudget.utils.Database;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -105,6 +104,9 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
 
     @Override
     public void onItemClick(View view, Object data, int position) {
+        Income income = (Income) data;
+        Database.removeIncome(getContext(),income);
+        populateData(Database.getIncomeList(getContext()));
 
     }
 

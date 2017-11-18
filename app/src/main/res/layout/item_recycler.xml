@@ -7,6 +7,44 @@
     android:layout_marginRight="@dimen/spacing_small_m"
     android:layout_marginTop="@dimen/spacing_small_m"
     app:cardCornerRadius="@dimen/spacing_small_m">
+    <com.daimajia.swipe.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/card_delete_color">
+            <!--What you want to show-->
+            <ImageButton
+                android:id="@+id/imageButtonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/card_delete_color"
+                app:srcCompat="@drawable/icon_delete" />
+
+
+            <TextView
+                android:id="@+id/del_text"
+                android:text="Delete Item?"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:textSize="@dimen/app_title_small"
+                android:textColor="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/button_del"
+                style="@style/simpleButton_del"
+                android:text="Yes" />
+        </LinearLayout>
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -96,7 +134,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_small"
-                        android:text="jklkjj refewer fdfd dffdffd f f f f f f f f f f f f ff " />
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -122,4 +160,5 @@
 
 
     </LinearLayout>
+    </com.daimajia.swipe.SwipeLayout>
 </android.support.v7.widget.CardView>

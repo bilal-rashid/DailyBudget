@@ -103,6 +103,9 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
 
     @Override
     public void onItemClick(View view, Object data, int position) {
+        Expense expense = (Expense) data;
+        Database.removeExpense(getContext(),expense);
+        populateData(Database.getExpenseList(getContext()));
 
     }
 
