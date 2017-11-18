@@ -15,6 +15,21 @@ public class Expense {
     public int month;
     public int day;
 
+    @Override
+    public boolean equals(Object obj) {
+        Expense expense = (Expense) obj;
+        if(((Expense) obj).year==this.year &&
+                ((Expense) obj).day==this.day &&
+                ((Expense) obj).type.equals(this.type) &&
+                ((Expense) obj).tag.equals(this.tag) &&
+                ((Expense) obj).expense==this.expense &&
+                ((Expense) obj).month==this.month&&
+                ((Expense) obj).icon==this.icon){
+            return true;
+        }
+        return false;
+    }
+
     public int compare(Expense item){
         if(item.year>this.year)
             return NumberComparison.GREATER_THAN.getValue();
