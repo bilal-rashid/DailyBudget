@@ -24,7 +24,6 @@ import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
-
 import java.util.Calendar;
 
 /**
@@ -83,6 +82,7 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         mHolder.incomeTypeSpinner.setAdapter(mExpenseTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
         mHolder.saveButton.setOnClickListener(this);
+        mHolder.inputLayoutExpense.setHint("Expense (in "+AppUtils.getCurrency(getContext())+")");
         mExpense = new Expense();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 //        mHolder.fab_Add.setOnClickListener(this);
@@ -112,25 +112,25 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
     }
 
     private void submitForm(View view) {
-        if (mHolder.incomeEditText.getText().toString().length() < 1) {
-            mHolder.inputLayoutIncome.setErrorEnabled(true);
-            mHolder.inputLayoutIncome.setError("Expense Amount Required");
+        if (mHolder.expenseEditText.getText().toString().length() < 1) {
+            mHolder.inputLayoutExpense.setErrorEnabled(true);
+            mHolder.inputLayoutExpense.setError("Expense Amount Required");
             return;
         }
-        mHolder.inputLayoutIncome.setError(null);
-        mHolder.inputLayoutIncome.setErrorEnabled(false);
+        mHolder.inputLayoutExpense.setError(null);
+        mHolder.inputLayoutExpense.setErrorEnabled(false);
         if (mHolder.dateEditText.getText().toString().length() < 1) {
             mHolder.inputLayoutDate.setErrorEnabled(true);
             mHolder.inputLayoutDate.setError("Select date");
             return;
         }
         try {
-            mExpense.expense = Double.parseDouble(mHolder.incomeEditText.getText().toString());
-            mHolder.inputLayoutIncome.setError(null);
-            mHolder.inputLayoutIncome.setErrorEnabled(false);
+            mExpense.expense = Double.parseDouble(mHolder.expenseEditText.getText().toString());
+            mHolder.inputLayoutExpense.setError(null);
+            mHolder.inputLayoutExpense.setErrorEnabled(false);
         } catch (Exception e) {
-            mHolder.inputLayoutIncome.setErrorEnabled(true);
-            mHolder.inputLayoutIncome.setError("Invalid Amount");
+            mHolder.inputLayoutExpense.setErrorEnabled(true);
+            mHolder.inputLayoutExpense.setError("Invalid Amount");
             return;
         }
         mHolder.inputLayoutDate.setError(null);
@@ -157,20 +157,20 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
 
 
     public static class ViewHolder {
-        TextInputEditText incomeEditText;
+        TextInputEditText expenseEditText;
         TextInputEditText tagEditText;
         TextInputEditText dateEditText;
         Button saveButton;
-        TextInputLayout inputLayoutIncome;
+        TextInputLayout inputLayoutExpense;
         TextInputLayout inputLayoutTag;
         TextInputLayout inputLayoutDate;
         AppCompatSpinner incomeTypeSpinner;
 
         public ViewHolder(View view) {
-            incomeEditText = (TextInputEditText) view.findViewById(R.id.edit_text_income);
+            expenseEditText = (TextInputEditText) view.findViewById(R.id.edit_text_expense);
             tagEditText = (TextInputEditText) view.findViewById(R.id.edit_text_tag);
             dateEditText = (TextInputEditText) view.findViewById(R.id.edit_text_date);
-            inputLayoutIncome = (TextInputLayout) view.findViewById(R.id.input_layout_income);
+            inputLayoutExpense = (TextInputLayout) view.findViewById(R.id.input_layout_income);
             inputLayoutTag = (TextInputLayout) view.findViewById(R.id.input_layout_tag);
             inputLayoutDate = (TextInputLayout) view.findViewById(R.id.input_layout_date);
             incomeTypeSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_incometype);

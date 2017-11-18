@@ -25,7 +25,7 @@
                 style="@style/myTextInputLayout">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edit_text_income"
+                    android:id="@+id/edit_text_expense"
                     style="@style/myEditText"
                     android:hint="@string/hint_expense"
                     android:imeOptions="actionNext"

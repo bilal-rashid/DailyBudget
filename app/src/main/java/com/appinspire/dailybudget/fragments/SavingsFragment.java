@@ -73,6 +73,8 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             if(mSavings.savings < 0){
                 mHolder.savings.setTextColor(ContextCompat.getColor(getContext(),R.color.card_expense_color));
             }
+            mHolder.currency.setText(AppUtils.getCurrency(getContext()));
+
         }
         setupRecyclerView();
     }
@@ -113,7 +115,7 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
     }
 
     public static class ViewHolder {
-        TextView date,savings;
+        TextView date,savings,currency;
         RecyclerView historyRecycler;
         LinearLayout errorLayout,savingsLayout;
 
@@ -122,6 +124,7 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             Typeface bold = Typeface.createFromAsset(view.getContext().getAssets(), "RobotoBold.ttf");
             date = (TextView) view.findViewById(R.id.textview_date);
             savings = (TextView) view.findViewById(R.id.textview_total_savings);
+            currency = (TextView) view.findViewById(R.id.savings_currency);
             historyRecycler = (RecyclerView) view.findViewById(R.id.recycler_history);
             savings.setTypeface(regular);
             date.setTypeface(regular);

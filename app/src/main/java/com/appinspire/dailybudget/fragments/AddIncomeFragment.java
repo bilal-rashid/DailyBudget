@@ -83,6 +83,7 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         mHolder.incomeTypeSpinner.setAdapter(mIncomeTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
         mHolder.saveButton.setOnClickListener(this);
+        mHolder.inputLayoutIncome.setHint("Income (in "+AppUtils.getCurrency(getContext())+")");
         mIncome = new Income();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 //        mHolder.fab_Add.setOnClickListener(this);

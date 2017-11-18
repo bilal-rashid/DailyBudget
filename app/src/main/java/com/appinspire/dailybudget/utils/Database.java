@@ -294,6 +294,6 @@ public class Database {
         PrefUtils.persistInt(context,Constants.CURRENCY,position);
     }
     public static int getCurrency(Context context){
-        return PrefUtils.getInt(context,Constants.CURRENCY,0);
+        return PrefUtils.getInt(context,Constants.CURRENCY,147);
     }
 }

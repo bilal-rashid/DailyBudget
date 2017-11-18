@@ -38,7 +38,9 @@ import java.io.File;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -444,6 +446,10 @@ public class AppUtils {
                     PorterDuff.Mode.MULTIPLY));
         }
         return mDrawable;
+    }
+    public static String getCurrency(Context context){
+        ArrayList<Currency> currencies = new ArrayList<Currency>(Currency.getAvailableCurrencies());
+        return currencies.get(Database.getCurrency(context)).getSymbol();
     }
 
 
