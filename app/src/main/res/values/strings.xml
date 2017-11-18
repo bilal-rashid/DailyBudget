@@ -24,6 +24,8 @@
     <string name="msg_user_not_log_in">Please Login</string>
     <string name="msg_logout">Are you sure you want to logout?</string>
     <string name="msg_exit">Are you sure you want to exit?</string>
+    <string name="title_clear_data">Clear data</string>
+    <string name="msg_clear_data">Are you Sure?</string>
     <string name="msg_cart_empty">Your cart is empty</string>
     <string name="msg_order_proceed">Please wait while we verify your order</string>
     <string name="msg_item_detail">ITEM DETAILS</string>
@@ -111,9 +113,12 @@
     <string name="temp_day">Monday</string>
     <string name="temp_proceed">PROCEED</string>
     <string name="temp_orders">ORDERS</string>
+    <string name="text_currency">Currency</string>
 
     <!-- button -->
     <string name="button_save">Save</string>
+    <string name="button_clear_data">Clear Data</string>
+    <string name="button_clear_cache">Clear Cache</string>
     <string name="button_sign_in">Sign In</string>
     <string name="button_guest_sign_in">Guest User</string>
     <string name="button_sign_up">Sign Up</string>
@@ -142,4 +147,5 @@
     <string name="feedback_thanking_note">Thankyou for your feedback</string>
     <string name="hint_income">Income (in $)</string>
     <string name="hint_expense">Expense (in $)</string>
+    <string name="note_currency"><b>Note:</b> This is only display currency. <u><i>\n(currency conversion is not enabled)</i></u></string>
 </resources>

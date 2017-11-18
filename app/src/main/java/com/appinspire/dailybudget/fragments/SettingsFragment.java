@@ -12,9 +12,11 @@ import android.widget.Button;
 
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.SpinnerAdapter;
+import com.appinspire.dailybudget.dialog.SimpleDialog;
 import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
-import com.appinspire.dailybudget.toolbox.ToolbarListener;
+import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
+import com.appinspire.dailybudget.utils.PrefUtils;
 
 /**
  * Created by Bilal Rashid on 10/16/2017.
@@ -23,6 +25,7 @@ import com.appinspire.dailybudget.utils.Database;
 public class SettingsFragment  extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener{
     private ViewHolder mHolder;
     private SpinnerAdapter mCurrencyAdapter;
+    private SimpleDialog mSimpleDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
         mHolder.spinner.setOnItemSelectedListener(this);
         mHolder.spinner.setSelection(Database.getCurrency(getContext()));
         mHolder.save.setOnClickListener(this);
+        mHolder.reset.setOnClickListener(this);
+        mHolder.clearCache.setOnClickListener(this);
     }
     @Override
     public void onClick(View view) {
@@ -58,6 +63,26 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
                 getActivity().onBackPressed();
                 break;
             case R.id.button_reset:
+                mSimpleDialog = new SimpleDialog(getContext(), getString(R.string.title_clear_data),getString(R.string.msg_clear_data),
+                        getString(R.string.button_cancel), getString(R.string.button_ok), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        switch (view.getId()) {
+                            case R.id.button_positive:
+                                mSimpleDialog.dismiss();
+                                PrefUtils.reset(getContext());
+                                break;
+                            case R.id.button_negative:
+                                mSimpleDialog.dismiss();
+                                break;
+                        }
+                    }
+                });
+                mSimpleDialog.show();
+                break;
+            case R.id.button_clear_cache:
+                AppUtils.deleteCache(getContext());
+                AppUtils.makeToast(getContext(),"Cache Cleared");
                 break;
         }
 
@@ -76,11 +101,12 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
     public static class ViewHolder {
 
         AppCompatSpinner spinner;
-        Button save,reset;
+        Button save,reset,clearCache;
         public ViewHolder(View view) {
             spinner = (AppCompatSpinner)view.findViewById(R.id.spinner_currency);
             save = (Button)view.findViewById(R.id.button_save);
             reset = (Button)view.findViewById(R.id.button_reset);
+            clearCache = (Button)view.findViewById(R.id.button_clear_cache);
 
         }
 
