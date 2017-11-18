@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -35,7 +38,9 @@ import java.io.File;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -59,6 +64,27 @@ public class AppUtils {
 //        }
     }
 
+    public static String getMonthShortName(int monthNumber)
+    {
+        String monthName="";
+
+        if(monthNumber>=0 && monthNumber<12)
+            try
+            {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.MONTH, monthNumber);
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM");
+                simpleDateFormat.setCalendar(calendar);
+                monthName = simpleDateFormat.format(calendar.getTime());
+            }
+            catch (Exception e)
+            {
+                if(e!=null)
+                    e.printStackTrace();
+            }
+        return monthName;
+    }
     public static String getDayOfMonth(String date) {
         if (date != null) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -407,14 +433,24 @@ public class AppUtils {
             return false;
         }
     }
-//    public static Drawable getColorDrawable(int image,Context context) {
-//
-//        Drawable mDrawable = ContextCompat.getDrawable(context, image);
-//        mDrawable.setColorFilter(new
-//                PorterDuffColorFilter(ContextCompat.getColor(context,R.color.tracking_stpi_indicatorColor),
-//                PorterDuff.Mode.MULTIPLY));
-//        return mDrawable;
-//    }
+    public static Drawable getColorDrawable(int image, Context context,boolean isWhite) {
+
+        Drawable mDrawable = ContextCompat.getDrawable(context, image);
+        if(isWhite) {
+            mDrawable.setColorFilter(new
+                    PorterDuffColorFilter(ContextCompat.getColor(context, R.color.colorLoader),
+                    PorterDuff.Mode.MULTIPLY));
+        }else {
+            mDrawable.setColorFilter(new
+                    PorterDuffColorFilter(ContextCompat.getColor(context, R.color.colorPrimaryDark),
+                    PorterDuff.Mode.MULTIPLY));
+        }
+        return mDrawable;
+    }
+    public static String getCurrency(Context context){
+        ArrayList<Currency> currencies = new ArrayList<Currency>(Currency.getAvailableCurrencies());
+        return currencies.get(Database.getCurrency(context)).getSymbol();
+    }
 
 
 }
