@@ -51,6 +51,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.start_year_text.setText(item.year+"");
         holder.start_day_text.setText(item.day+"");
         holder.start_month_text.setText(AppUtils.getMonthShortName(item.month)+"");
+        holder.currency.setText(AppUtils.getCurrency(holder.itemView.getContext()));
 
     }
     public Saving getItem(int position) {
@@ -76,9 +77,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView start_day_text;
         TextView start_month_text;
         TextView start_year_text;
-        TextView end_day_text;
-        TextView end_month_text;
-        TextView end_year_text;
+        TextView currency;
         TextView total_savings_text;
 
         public ViewHolder(View view) {
@@ -88,15 +87,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             start_day_text = (TextView) view.findViewById(R.id.start_day);
             start_month_text= (TextView) view.findViewById(R.id.start_month);
             start_year_text= (TextView) view.findViewById(R.id.start_year);
-            end_day_text= (TextView) view.findViewById(R.id.text_end_day);
-            end_month_text= (TextView) view.findViewById(R.id.text_end_month);
-            end_year_text= (TextView) view.findViewById(R.id.text_end_year);
+            currency= (TextView) view.findViewById(R.id.savings_currency);
             total_savings_text= (TextView) view.findViewById(R.id.textview_total_savings);
-            (view.findViewById(R.id.end_layout)).setVisibility(View.GONE);
             total_savings_text.setTypeface(regular);
             start_day_text.setTypeface(bold);
             start_month_text.setTypeface(bold);
             start_year_text.setTypeface(bold);
+            currency.setTypeface(regular);
 
         }
 

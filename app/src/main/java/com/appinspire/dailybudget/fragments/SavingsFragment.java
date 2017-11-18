@@ -130,6 +130,7 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             date.setTypeface(regular);
             errorLayout = view.findViewById(R.id.error_savings);
             savingsLayout= view.findViewById(R.id.savings_layout);
+            currency.setTypeface(bold);
 
 
         }
