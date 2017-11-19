@@ -6,7 +6,6 @@ package com.appinspire.dailybudget.models;
 
 public class BigPurchase {
     public double amount;
-    public double progress;
     public double percent;
     public String type;
     public int icon;
@@ -18,7 +17,6 @@ public class BigPurchase {
         BigPurchase purchase = (BigPurchase) obj;
         if (((BigPurchase) obj).amount == this.amount &&
                 ((BigPurchase) obj).percent == this.percent &&
-                ((BigPurchase) obj).progress== this.progress &&
                 ((BigPurchase) obj).type.equals(this.type) &&
                 ((BigPurchase) obj).tag.equals(this.tag) &&
                 ((BigPurchase) obj).completed == this.completed &&
