@@ -17,6 +17,7 @@ import com.appinspire.dailybudget.SimpleFrameActivity;
 import com.appinspire.dailybudget.enumerations.AnimationEnum;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * Created by Bilal Rashid on 10/10/2017.
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
 //        if (!EventBus.getDefault().isRegistered(this))
 //            EventBus.getDefault().register(this);
     }

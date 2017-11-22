@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -76,7 +80,15 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             mHolder.currency.setText(AppUtils.getCurrency(getContext()));
 
         }
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
         setupRecyclerView();
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
     }
     private void setupRecyclerView() {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -118,6 +130,7 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
         TextView date,savings,currency;
         RecyclerView historyRecycler;
         LinearLayout errorLayout,savingsLayout;
+        AdView mAdView;
 
         public ViewHolder(View view) {
             Typeface regular = Typeface.createFromAsset(view.getContext().getAssets(), "RobotoRegular.ttf");
@@ -126,6 +139,8 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
             savings = (TextView) view.findViewById(R.id.textview_total_savings);
             currency = (TextView) view.findViewById(R.id.savings_currency);
             historyRecycler = (RecyclerView) view.findViewById(R.id.recycler_history);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
             savings.setTypeface(regular);
             date.setTypeface(regular);
             errorLayout = view.findViewById(R.id.error_savings);

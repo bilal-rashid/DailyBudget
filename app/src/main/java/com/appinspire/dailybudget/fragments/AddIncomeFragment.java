@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +25,9 @@ import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Calendar;
 
@@ -86,7 +90,14 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         mHolder.inputLayoutIncome.setHint("Income (in "+AppUtils.getCurrency(getContext())+")");
         mIncome = new Income();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//        mHolder.fab_Add.setOnClickListener(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 
@@ -166,6 +177,8 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         TextInputLayout inputLayoutTag;
         TextInputLayout inputLayoutDate;
         AppCompatSpinner incomeTypeSpinner;
+        AdView mAdView;
+
 
         public ViewHolder(View view) {
             incomeEditText = (TextInputEditText) view.findViewById(R.id.edit_text_income);
@@ -176,6 +189,8 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
             inputLayoutDate = (TextInputLayout) view.findViewById(R.id.input_layout_date);
             incomeTypeSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_incometype);
             saveButton = (Button) view.findViewById(R.id.button_save);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
         }
 
     }

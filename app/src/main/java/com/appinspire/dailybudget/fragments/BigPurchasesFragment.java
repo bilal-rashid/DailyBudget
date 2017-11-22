@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import com.appinspire.dailybudget.adapters.BigPurchaseAdapter;
 import com.appinspire.dailybudget.models.BigPurchase;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
@@ -59,6 +63,14 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
                 }
             }
         });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -98,10 +110,13 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
 
         FloatingActionButton fab_Add;
         RecyclerView recyclerView;
+        AdView mAdView;
 
         public ViewHolder(View view) {
             fab_Add = (FloatingActionButton) view.findViewById(R.id.add_button);
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_big_purchases);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
         }
 
     }

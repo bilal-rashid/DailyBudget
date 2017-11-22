@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
 import com.appinspire.dailybudget.utils.Database;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
@@ -63,6 +67,14 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
                 } else if (dy < 0 && mHolder.fab_Add.getVisibility() != View.VISIBLE) {
                     mHolder.fab_Add.show();
                 }
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
             }
         });
 
@@ -112,10 +124,13 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
     public static class ViewHolder {
         FloatingActionButton fab_Add;
         RecyclerView recyclerView;
+        AdView mAdView;
 
         public ViewHolder(View view) {
             fab_Add = (FloatingActionButton) view.findViewById(R.id.add_button);
             recyclerView = (RecyclerView) view.findViewById(R.id.income_recycler);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
         }
 
     }
