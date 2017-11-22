@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/spacing_large">
+
             <ImageView
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src="@drawable/income"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing_medium"/>
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:src="@drawable/income" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_income"
                 style="@style/myTextInputLayout">
@@ -32,12 +40,13 @@
                     android:inputType="numberDecimal"
                     android:maxLength="25" />
             </android.support.design.widget.TextInputLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:text="Income Source"
                 android:textColor="@color/colorPrimary"
-                android:text="Income Source"/>
+                android:textSize="12sp" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/spinner_incometype"
@@ -60,6 +69,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_date"
                 style="@style/myTextInputLayout">
@@ -67,12 +77,13 @@
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/edit_text_date"
                     style="@style/myEditText"
-                    android:hint="Date"
                     android:clickable="true"
+                    android:hint="Date"
                     android:imeOptions="actionNext"
                     android:inputType="date"
                     android:maxLength="25" />
             </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/button_save"
                 style="@style/simpleButton"
@@ -82,5 +93,16 @@
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hint_expense"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
