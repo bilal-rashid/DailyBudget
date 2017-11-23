@@ -17,7 +17,7 @@ import com.appinspire.dailybudget.SimpleFrameActivity;
 import com.appinspire.dailybudget.enumerations.AnimationEnum;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
-import com.google.android.gms.ads.MobileAds;
+import com.appinspire.dailybudget.utils.AppUtils;
 
 /**
  * Created by Bilal Rashid on 10/10/2017.
@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544~3347511713");
 //        if (!EventBus.getDefault().isRegistered(this))
 //            EventBus.getDefault().register(this);
     }
@@ -83,12 +82,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
                         SavingsFragment.class.getName(), null);
                 break;
             case R.id.card_purchase:
-                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
-                        BigPurchasesFragment.class.getName(), null);
+//                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+//                        BigPurchasesFragment.class.getName(), null);
+                AppUtils.showSnackBar(getView(),"Coming Soon");
                 break;
             case R.id.card_reports:
-                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
-                        ReportsFragment.class.getName(), null);
+//                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+//                        ReportsFragment.class.getName(), null);
+                AppUtils.showSnackBar(getView(),"Coming Soon");
                 break;
             case R.id.card_setting:
                 ActivityUtils.startActivity(getActivity(), SimpleFrameActivity.class,
