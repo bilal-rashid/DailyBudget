@@ -14,6 +14,7 @@ import com.appinspire.dailybudget.dialog.SimpleDialog;
 import com.appinspire.dailybudget.fragments.HomeFragment;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
+import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -37,8 +38,8 @@ public class HomeActivity extends AppCompatActivity implements ToolbarListener {
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 } else {
-                    mHandler.postDelayed(mRunnable, REFRESH_TIME_SECONDS);
-                    Log.d("TAAAG","running");
+                    if(AppUtils.isInternetAvailable(getApplicationContext()))
+                        mHandler.postDelayed(mRunnable, REFRESH_TIME_SECONDS);
                 }
             }catch (Exception e){}
 
@@ -55,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements ToolbarListener {
         mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 1000);
+        mHandler.postDelayed(mRunnable, 2000);
 
         String fragmentName = getIntent().getStringExtra(Constants.FRAGMENT_NAME);
         Bundle bundle = getIntent().getBundleExtra(Constants.DATA);

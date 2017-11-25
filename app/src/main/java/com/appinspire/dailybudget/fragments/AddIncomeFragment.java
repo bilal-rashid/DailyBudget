@@ -3,11 +3,11 @@ package com.appinspire.dailybudget.fragments;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatSpinner;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,10 +24,12 @@ import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
+import com.appinspire.dailybudget.utils.Constants;
 import com.appinspire.dailybudget.utils.Database;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.Calendar;
 
@@ -40,6 +42,25 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
     private ViewHolder mHolder;
     private SpinnerAdapter mIncomeTypeAdapter;
     private Income mIncome;
+    private boolean mShowAd;
+    private InterstitialAd mInterstitialAd;
+    private final int REFRESH_TIME_SECONDS = 2 * 1000;
+    private Handler mHandler;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                mHandler.removeCallbacks(mRunnable);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    if(AppUtils.isInternetAvailable(getContext()))
+                        mHandler.postDelayed(mRunnable, REFRESH_TIME_SECONDS);
+                }
+            }catch (Exception e){}
+
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +85,10 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mHandler = new Handler();
         mHolder = new ViewHolder(view);
         mHolder.dateEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -83,6 +108,7 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
                 return true;
             }
         });
+        mShowAd = getArguments().getBoolean(Constants.SHOWAD,false);
         mIncomeTypeAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.INCOME.getValue());
         mHolder.incomeTypeSpinner.setAdapter(mIncomeTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
@@ -149,6 +175,8 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mIncome.tag = mHolder.tagEditText.getText().toString();
         Database.saveIncome(getContext(),mIncome);
+        if(mShowAd)
+            mHandler.postDelayed(mRunnable, 500);
         getActivity().onBackPressed();
 
 
