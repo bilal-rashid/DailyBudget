@@ -31,6 +31,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 
@@ -47,6 +48,7 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
     private InterstitialAd mInterstitialAd;
     private final int REFRESH_TIME_SECONDS = 2 * 1000;
     private Handler mHandler;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
@@ -125,6 +127,7 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
                 mHolder.mAdView.setVisibility(View.VISIBLE);
             }
         });
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
     }
 
@@ -176,6 +179,12 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mExpense.tag = mHolder.tagEditText.getText().toString();
         Database.saveExpense(getContext(),mExpense);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Expense");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, " " + mExpense.type);
+        bundle.putString(FirebaseAnalytics.Param.PRICE, " " + mExpense.expense);
+        bundle.putString(FirebaseAnalytics.Param.START_DATE, mExpense.day + "/" + mExpense.month + "/" + mExpense.year);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         if(mShowAd)
             mHandler.postDelayed(mRunnable, 500);
         getActivity().onBackPressed();

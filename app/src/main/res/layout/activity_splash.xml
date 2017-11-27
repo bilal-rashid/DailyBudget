@@ -12,7 +12,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/analyticsb"
+        android:src="@drawable/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/text_appname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

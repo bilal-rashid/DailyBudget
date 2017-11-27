@@ -30,6 +30,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Calendar;
 
@@ -43,6 +44,7 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
     private SpinnerAdapter mIncomeTypeAdapter;
     private Income mIncome;
     private boolean mShowAd;
+    private FirebaseAnalytics mFirebaseAnalytics;
     private InterstitialAd mInterstitialAd;
     private final int REFRESH_TIME_SECONDS = 2 * 1000;
     private Handler mHandler;
@@ -54,10 +56,11 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 } else {
-                    if(AppUtils.isInternetAvailable(getContext()))
+                    if (AppUtils.isInternetAvailable(getContext()))
                         mHandler.postDelayed(mRunnable, REFRESH_TIME_SECONDS);
                 }
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
         }
     };
@@ -108,22 +111,23 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
                 return true;
             }
         });
-        mShowAd = getArguments().getBoolean(Constants.SHOWAD,false);
+        mShowAd = getArguments().getBoolean(Constants.SHOWAD, false);
         mIncomeTypeAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.INCOME.getValue());
         mHolder.incomeTypeSpinner.setAdapter(mIncomeTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
         mHolder.saveButton.setOnClickListener(this);
-        mHolder.inputLayoutIncome.setHint("Income (in "+AppUtils.getCurrency(getContext())+")");
+        mHolder.inputLayoutIncome.setHint("Income (in " + AppUtils.getCurrency(getContext()) + ")");
         mIncome = new Income();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         AdRequest adRequest = new AdRequest.Builder().build();
         mHolder.mAdView.loadAd(adRequest);
-        mHolder.mAdView.setAdListener(new AdListener(){
+        mHolder.mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
                 mHolder.mAdView.setVisibility(View.VISIBLE);
             }
         });
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
     }
 
@@ -132,9 +136,9 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         public void onDateSet(DatePicker view, int year,
                               int monthOfYear, int dayOfMonth) {
             mHolder.dateEditText.setText("" + AppUtils.getMonthShortName(monthOfYear) + " " + dayOfMonth + "," + year);
-            mIncome.year=year;
-            mIncome.day=dayOfMonth;
-            mIncome.month=monthOfYear;
+            mIncome.year = year;
+            mIncome.day = dayOfMonth;
+            mIncome.month = monthOfYear;
 
         }
     };
@@ -174,8 +178,14 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
         mHolder.inputLayoutDate.setError(null);
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mIncome.tag = mHolder.tagEditText.getText().toString();
-        Database.saveIncome(getContext(),mIncome);
-        if(mShowAd)
+        Database.saveIncome(getContext(), mIncome);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Income");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, " " + mIncome.type);
+        bundle.putString(FirebaseAnalytics.Param.PRICE, " " + mIncome.income);
+        bundle.putString(FirebaseAnalytics.Param.START_DATE, mIncome.day + "/" + mIncome.month + "/" + mIncome.year);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        if (mShowAd)
             mHandler.postDelayed(mRunnable, 500);
         getActivity().onBackPressed();
 
@@ -217,7 +227,7 @@ public class AddIncomeFragment extends Fragment implements View.OnClickListener,
             inputLayoutDate = (TextInputLayout) view.findViewById(R.id.input_layout_date);
             incomeTypeSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_incometype);
             saveButton = (Button) view.findViewById(R.id.button_save);
-            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView = (AdView) view.findViewById(R.id.adView);
             mAdView.setVisibility(View.GONE);
         }
 
