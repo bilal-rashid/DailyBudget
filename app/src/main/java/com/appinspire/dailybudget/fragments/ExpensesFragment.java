@@ -102,7 +102,7 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
         } else {
 //            mHolder.sErrorContainer.setVisibility(View.GONE);
         }
-        mShowAd = (objects.size()%3) == 0;
+        mShowAd = (objects.size()%4) == 0;
     }
 
     @Override
