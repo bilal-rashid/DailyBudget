@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements ToolbarListener {
         mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 2000);
+//        mHandler.postDelayed(mRunnable, 2000);
 
         String fragmentName = getIntent().getStringExtra(Constants.FRAGMENT_NAME);
         Bundle bundle = getIntent().getBundleExtra(Constants.DATA);
