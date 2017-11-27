@@ -150,8 +150,8 @@
     <string name="hint_expense">Expense (in $)</string>
     <string name="note_currency"><b>Note:</b> This is only display currency. <u><i>\n(currency conversion is not enabled)</i></u></string>
     <!--Admob ids-->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="admob_interstitial">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_app_id">ca-app-pub-8567160823440243~6793330292</string>
+    <string name="admob_banner_id">ca-app-pub-8567160823440243/3873978323</string>
+    <string name="admob_interstitial">ca-app-pub-8567160823440243/6852986140</string>
     <string name="splash_text">Pocket Finance Manager</string>
 </resources>
