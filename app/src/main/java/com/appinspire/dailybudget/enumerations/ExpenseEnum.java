@@ -13,6 +13,8 @@ public enum ExpenseEnum {
     TRANSPORT("TRANSPORT",R.drawable.icon_transport),
     ENTERTAINMENT("ENTERTAINMENT",R.drawable.icon_entertainment),
     SPORTS("SPORTS",R.drawable.icon_sports),
+    MUSIC("MUSICAL INSTRUMENT",R.drawable.guitar),
+    DRONE("QUADCOPTER",R.drawable.drone),
     HEALTH("HEALTH",R.drawable.icon_health),
     TAXI("TAXI",R.drawable.icon_taxi),
     CLOTHES("CLOTHES",R.drawable.icon_clothing),
@@ -26,7 +28,11 @@ public enum ExpenseEnum {
     TV_BILL("TV BILL",R.drawable.icon_tv_bill),
     CREDIT_CARD("CREDIT CARD",R.drawable.icon_credit_card_bill),
     INTERNET_BILL("INTERNET BILL",R.drawable.icon_internet_bill),
-    VEHICLE_MAINTENANCE ("VEHICLE MAINTENANCE",R.drawable.icon_maintenance);
+    CAR ("CAR",R.drawable.car),
+    BIKE("MOTOR BIKE",R.drawable.motor_bike),
+    BICYCLE ("BICYCLE",R.drawable.bicycle),
+    VEHICLE_MAINTENANCE ("VEHICLE MAINTENANCE",R.drawable.icon_maintenance),
+    OTHER ("OTHER",R.drawable.icon_other_income);
 
     private int id;
     private String name;
