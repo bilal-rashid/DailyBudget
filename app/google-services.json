@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "227266176094",
+    "firebase_url": "https://dailybudget-2a92d.firebaseio.com",
+    "project_id": "dailybudget-2a92d",
+    "storage_bucket": "dailybudget-2a92d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227266176094:android:c1c9ea78d8868b9f",
+        "android_client_info": {
+          "package_name": "com.appinspire.dailybudget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227266176094-enc8hj771kese9oijl76samq8vo4d636.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDROYMhsQzM8tVcmlSECNvP1c_0IvWq2as"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,6 +11,7 @@ public class Constants {
     public static final String EXPENSE_LIST = "expenses";
     public static final String SAVING_LIST = "savings";
     public static final String CURRENCY = "currency";
+    public static final String SHOWAD = "mshowad";
     public static final String USER_AVAILABLE = "user available";
 
     public static final String USER_ONE_SIGNAL_ID = "user_one_signal_id";

@@ -3,10 +3,12 @@ package com.appinspire.dailybudget.fragments;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +25,14 @@ import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
+import com.appinspire.dailybudget.utils.Constants;
 import com.appinspire.dailybudget.utils.Database;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.Calendar;
 
 /**
@@ -35,6 +44,26 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
     private ViewHolder mHolder;
     private SpinnerAdapter mExpenseTypeAdapter;
     private Expense mExpense;
+    private boolean mShowAd;
+    private InterstitialAd mInterstitialAd;
+    private final int REFRESH_TIME_SECONDS = 2 * 1000;
+    private Handler mHandler;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                mHandler.removeCallbacks(mRunnable);
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    if(AppUtils.isInternetAvailable(getContext()))
+                        mHandler.postDelayed(mRunnable, REFRESH_TIME_SECONDS);
+                }
+            }catch (Exception e){}
+
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +89,10 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mHolder = new ViewHolder(view);
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mHandler = new Handler();
         mHolder.dateEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -78,6 +111,7 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
                 return true;
             }
         });
+        mShowAd = getArguments().getBoolean(Constants.SHOWAD,false);
         mExpenseTypeAdapter = new SpinnerAdapter(getActivity(), SpinnerTypeEnum.EXPENSE.getValue());
         mHolder.incomeTypeSpinner.setAdapter(mExpenseTypeAdapter);
         mHolder.incomeTypeSpinner.setOnItemSelectedListener(this);
@@ -85,7 +119,15 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         mHolder.inputLayoutExpense.setHint("Expense (in "+AppUtils.getCurrency(getContext())+")");
         mExpense = new Expense();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//        mHolder.fab_Add.setOnClickListener(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
     }
 
@@ -137,6 +179,14 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         mHolder.inputLayoutDate.setErrorEnabled(false);
         mExpense.tag = mHolder.tagEditText.getText().toString();
         Database.saveExpense(getContext(),mExpense);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Expense");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, " " + mExpense.type);
+        bundle.putString(FirebaseAnalytics.Param.PRICE, " " + mExpense.expense);
+        bundle.putString(FirebaseAnalytics.Param.START_DATE, mExpense.day + "/" + mExpense.month + "/" + mExpense.year);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        if(mShowAd)
+            mHandler.postDelayed(mRunnable, 500);
         getActivity().onBackPressed();
 
 
@@ -165,6 +215,7 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
         TextInputLayout inputLayoutTag;
         TextInputLayout inputLayoutDate;
         AppCompatSpinner incomeTypeSpinner;
+        AdView mAdView;
 
         public ViewHolder(View view) {
             expenseEditText = (TextInputEditText) view.findViewById(R.id.edit_text_expense);
@@ -175,6 +226,8 @@ public class AddExpenseFragment extends Fragment implements View.OnClickListener
             inputLayoutDate = (TextInputLayout) view.findViewById(R.id.input_layout_date);
             incomeTypeSpinner = (AppCompatSpinner) view.findViewById(R.id.spinner_incometype);
             saveButton = (Button) view.findViewById(R.id.button_save);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
         }
 
     }

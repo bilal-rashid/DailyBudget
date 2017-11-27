@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,11 @@ import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
+import com.appinspire.dailybudget.utils.Constants;
 import com.appinspire.dailybudget.utils.Database;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
@@ -28,6 +33,7 @@ import java.util.List;
 public class ExpensesFragment extends Fragment implements View.OnClickListener,OnItemClickListener {
     private ViewHolder mHolder;
     private ExpenseAdapter mExpenseAdapter;
+    private boolean mShowAd;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,14 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
                 }
             }
         });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
 
 
     }
@@ -88,14 +102,17 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
         } else {
 //            mHolder.sErrorContainer.setVisibility(View.GONE);
         }
+        mShowAd = (objects.size()%4) == 0;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.add_button:
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constants.SHOWAD,mShowAd);
                 ActivityUtils.startActivity(getActivity(), FrameActivity.class,
-                        AddExpenseFragment.class.getName(), null);
+                        AddExpenseFragment.class.getName(), bundle);
                 break;
         }
 
@@ -112,10 +129,13 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
     public static class ViewHolder {
         FloatingActionButton fab_Add;
         RecyclerView recyclerView;
+        AdView mAdView;
 
         public ViewHolder(View view) {
             fab_Add = (FloatingActionButton) view.findViewById(R.id.add_button);
             recyclerView = (RecyclerView) view.findViewById(R.id.income_recycler);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
         }
 
     }

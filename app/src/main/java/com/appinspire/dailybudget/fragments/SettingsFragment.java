@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,9 @@ import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Database;
 import com.appinspire.dailybudget.utils.PrefUtils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 /**
  * Created by Bilal Rashid on 10/16/2017.
@@ -54,6 +58,14 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
         mHolder.save.setOnClickListener(this);
         mHolder.reset.setOnClickListener(this);
         mHolder.clearCache.setOnClickListener(this);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mHolder.mAdView.loadAd(adRequest);
+        mHolder.mAdView.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                mHolder.mAdView.setVisibility(View.VISIBLE);
+            }
+        });
     }
     @Override
     public void onClick(View view) {
@@ -102,11 +114,14 @@ public class SettingsFragment  extends Fragment implements View.OnClickListener,
 
         AppCompatSpinner spinner;
         Button save,reset,clearCache;
+        AdView mAdView;
         public ViewHolder(View view) {
             spinner = (AppCompatSpinner)view.findViewById(R.id.spinner_currency);
             save = (Button)view.findViewById(R.id.button_save);
             reset = (Button)view.findViewById(R.id.button_reset);
             clearCache = (Button)view.findViewById(R.id.button_clear_cache);
+            mAdView = (AdView)view.findViewById(R.id.adView);
+            mAdView.setVisibility(View.GONE);
 
         }
 

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_small_m"
+    android:layout_marginRight="@dimen/spacing_small_m"
+    android:layout_marginTop="@dimen/spacing_small_m"
+    app:cardCornerRadius="@dimen/spacing_small_m">
+    <com.daimajia.swipe.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@color/card_delete_color"
+                android:layout_weight="1">
+                <ImageButton
+                    android:id="@+id/imageButtonDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/card_delete_color"
+                    app:srcCompat="@drawable/icon_delete" />
+                <TextView
+                    android:id="@+id/del_text"
+                    android:text="Delete Item?"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:textSize="@dimen/app_title_small"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/button_del"
+                    style="@style/simpleButton_del"
+                    android:text="Yes" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout_buy_option"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/card_income_color"
+                android:layout_weight="1">
+
+            </LinearLayout>
+            <!--What you want to show-->
+
+        </LinearLayout>
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/colorPrimaryDark">
+
+                <ImageView
+                    android:id="@+id/image_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/expense" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_xsmall"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:text="Entertainment"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/app_title" />
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="@dimen/spacing_small_m"
+                        app:rcProgress="60"
+                        app:rcMax="100"
+                        app:rcRadius="6dp"
+                        app:rcBackgroundPadding="3dp"
+                        app:rcReverse="false"
+                        app:rcProgressColor="@color/colorPrimaryDark"
+                        app:rcBackgroundColor="@color/colorTabs" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/spacing_medium"
+                        android:layout_weight="3"
+                        android:gravity="left"
+                        android:text="60%" />
+
+                    <TextView
+                        android:id="@+id/text_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_weight="4"
+                        android:gravity="right"
+                        android:text="650000"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/app_title_small" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small_m"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/layout_tag"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tag:" />
+
+                        <TextView
+                            android:id="@+id/text_tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_small"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:gravity="right">
+
+                        <TextView
+                            android:id="@+id/text_currency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_medium"
+                            android:text="RS"
+                            android:textSize="@dimen/app_body_1" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </com.daimajia.swipe.SwipeLayout>
+</android.support.v7.widget.CardView>
