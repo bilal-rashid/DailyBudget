@@ -105,7 +105,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         } else {
 //            mHolder.sErrorContainer.setVisibility(View.GONE);
         }
-        mShowAd = (objects.size()%3) == 0;
+        mShowAd = ((objects.size()%2) == 0) && (objects.size()>0);
     }
     @Override
     public void onClick(View view) {
