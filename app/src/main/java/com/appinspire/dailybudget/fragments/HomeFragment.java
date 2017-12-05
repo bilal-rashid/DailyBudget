@@ -82,9 +82,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
                         SavingsFragment.class.getName(), null);
                 break;
             case R.id.card_purchase:
-//                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
-//                        BigPurchasesFragment.class.getName(), null);
-                AppUtils.showSnackBar(getView(),"Coming Soon");
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        BigPurchasesFragment.class.getName(), null);
+//                AppUtils.showSnackBar(getView(),"Coming Soon");
                 break;
             case R.id.card_reports:
 //                ActivityUtils.startActivity(getActivity(), FrameActivity.class,

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/spacing_extra_large"
+    android:background="@color/colorDialogBG"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <biz.kasual.materialnumberpicker.MaterialNumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:npBackgroundColor="@color/colorDialogBG"
+            app:npSeparatorColor="@color/colorPrimaryDark"
+            app:npTextColor="@color/colorPrimaryDark"
+            app:npTextSize="@dimen/app_headline" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_cancel"
+                style="@style/simpleButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/button_cancel" />
+
+            <Space
+                android:layout_width="@dimen/spacing_small"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button_confirm"
+                style="@style/simpleButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/button_confirm" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

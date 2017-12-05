@@ -14,6 +14,7 @@ public enum ExpenseEnum {
     ENTERTAINMENT("ENTERTAINMENT",R.drawable.icon_entertainment),
     SPORTS("SPORTS",R.drawable.icon_sports),
     MUSIC("MUSICAL INSTRUMENT",R.drawable.guitar),
+    CONSOLE("Gaming Console",R.drawable.console),
     DRONE("QUADCOPTER",R.drawable.drone),
     HEALTH("HEALTH",R.drawable.icon_health),
     TAXI("TAXI",R.drawable.icon_taxi),

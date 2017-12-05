@@ -12,6 +12,7 @@ import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.enumerations.ExpenseEnum;
 import com.appinspire.dailybudget.enumerations.IncomeEnum;
 import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
+import com.appinspire.dailybudget.enumerations.WishListEnum;
 import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.utils.AppUtils;
 
@@ -46,6 +47,8 @@ public class SpinnerAdapter extends BaseAdapter {
             return ExpenseEnum.values().length;
         else if(spinnerType == SpinnerTypeEnum.CURRENCY.getValue())
             return Currency.getAvailableCurrencies().size();
+        else if(spinnerType == SpinnerTypeEnum.WISHLIST.getValue())
+            return WishListEnum.values().length;
         return 0;
     }
 
@@ -78,6 +81,9 @@ public class SpinnerAdapter extends BaseAdapter {
             } else if (spinnerType == SpinnerTypeEnum.INCOME.getValue()) {
                 icon.setImageDrawable(AppUtils.getColorDrawable(IncomeEnum.values()[i].getIconId(), context, false));
                 names.setText(IncomeEnum.values()[i].getName());
+            } else if (spinnerType == SpinnerTypeEnum.WISHLIST.getValue()){
+                icon.setImageDrawable(AppUtils.getColorDrawable(WishListEnum.values()[i].getIconId(), context, false));
+                names.setText(WishListEnum.values()[i].getName());
             }
             return view;
         }

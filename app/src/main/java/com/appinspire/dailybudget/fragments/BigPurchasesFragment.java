@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.appinspire.dailybudget.FrameActivity;
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.BigPurchaseAdapter;
 import com.appinspire.dailybudget.models.BigPurchase;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
+import com.appinspire.dailybudget.utils.ActivityUtils;
+import com.appinspire.dailybudget.utils.Constants;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -29,6 +32,7 @@ import java.util.List;
 public class BigPurchasesFragment extends Fragment implements View.OnClickListener ,OnItemClickListener {
     private ViewHolder mHolder;
     private BigPurchaseAdapter mBigPurchaseAdapter;
+    private boolean mShowAd;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +98,19 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
         } else {
 //            mHolder.sErrorContainer.setVisibility(View.GONE);
         }
+        mShowAd = ((objects.size()%3) == 0) && (objects.size()>0);
     }
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()){
+            case R.id.add_button:
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(Constants.SHOWAD,mShowAd);
+                ActivityUtils.startActivity(getActivity(), FrameActivity.class,
+                        AddBigPurchaseFragment.class.getName(), bundle);
+                break;
+        }
     }
 
     @Override
