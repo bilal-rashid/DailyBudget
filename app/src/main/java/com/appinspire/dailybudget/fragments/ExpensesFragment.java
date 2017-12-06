@@ -123,6 +123,7 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
         Expense expense = (Expense) data;
         Database.removeExpense(getContext(),expense);
         populateData(Database.getExpenseList(getContext()));
+        mHolder.fab_Add.show();
 
     }
 

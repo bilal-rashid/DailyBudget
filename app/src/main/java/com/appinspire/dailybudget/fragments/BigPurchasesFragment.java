@@ -126,6 +126,10 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
     @Override
     public void onItemClick(View view, Object data, int position) {
 
+        BigPurchase item = (BigPurchase) data;
+        Database.removeBigPurchase(getContext(),item);
+        populateData(Database.getWishList(getContext()));
+        mHolder.fab_Add.show();
     }
 
     public static class ViewHolder {
