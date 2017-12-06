@@ -123,6 +123,7 @@
     <string name="button_guest_sign_in">Guest User</string>
     <string name="button_sign_up">Sign Up</string>
     <string name="button_cancel">Cancel</string>
+    <string name="button_confirm">Confirm</string>
     <string name="button_ok">OK</string>
     <string name="button_finish">Finish</string>
     <string name="button_check_out">CHECKOUT</string>
@@ -148,6 +149,7 @@
     <string name="company"><b>A P P   I N S P I R E</b></string>
     <string name="hint_income">Income (in $)</string>
     <string name="hint_expense">Expense (in $)</string>
+    <string name="hint_amount">Amount (in $)</string>
     <string name="note_currency"><b>Note:</b> This is only display currency. <u><i>\n(currency conversion is not enabled)</i></u></string>
     <!--Admob ids-->
     <string name="admob_app_id">ca-app-pub-8567160823440243~6793330292</string>

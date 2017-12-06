@@ -125,6 +125,7 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
         Income income = (Income) data;
         Database.removeIncome(getContext(),income);
         populateData(Database.getIncomeList(getContext()));
+        mHolder.fab_Add.show();
 
     }
 

@@ -37,6 +37,7 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
     compile 'com.google.android.gms:play-services-ads:11.6.0'
+    compile 'biz.kasual:materialnumberpicker:1.2.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

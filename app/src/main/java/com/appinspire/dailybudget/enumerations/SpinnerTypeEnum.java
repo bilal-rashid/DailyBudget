@@ -7,7 +7,8 @@ package com.appinspire.dailybudget.enumerations;
 public enum SpinnerTypeEnum {
     INCOME(0),
     EXPENSE(1),
-    CURRENCY(2);
+    CURRENCY(2),
+    WISHLIST(3);
 
     private final int id;
 

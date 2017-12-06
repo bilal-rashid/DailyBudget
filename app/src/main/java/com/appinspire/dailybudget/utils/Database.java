@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.appinspire.dailybudget.enumerations.NumberComparison;
+import com.appinspire.dailybudget.models.BigPurchase;
 import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.models.Income;
 import com.appinspire.dailybudget.models.Saving;
@@ -296,4 +297,32 @@ public class Database {
     public static int getCurrency(Context context){
         return PrefUtils.getInt(context,Constants.CURRENCY,147);
     }
+    ///////////BigPurchases/////////////////
+    public static void saveWishList(Context context, List<BigPurchase> items) {
+        if (items != null) {
+            PrefUtils.persistString(context, Constants.WISH_LIST, GsonUtils.toJson(items));
+        }
+    }
+    public static List<BigPurchase> getWishList(Context context) {
+        String json = PrefUtils.getString(context, Constants.WISH_LIST);
+        if (TextUtils.isEmpty(json)) {
+            return new ArrayList<>();
+        }
+        return new Gson().fromJson(PrefUtils.getString(context, Constants.WISH_LIST), new TypeToken<List<BigPurchase>>() {
+        }.getType());
+    }
+
+    public static void saveBigPurchase(Context context, BigPurchase item) {
+        List<BigPurchase> list = getWishList(context);
+        list.add(item);
+        saveWishList(context,list);
+
+    }
+    public static void removeBigPurchase(Context context, BigPurchase item) {
+        List<BigPurchase> list = getWishList(context);
+        list.remove(item);
+        saveWishList(context,list);
+
+    }
+
 }

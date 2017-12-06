@@ -10,6 +10,7 @@ public class Constants {
     public static final String INCOME_LIST = "incomes";
     public static final String EXPENSE_LIST = "expenses";
     public static final String SAVING_LIST = "savings";
+    public static final String WISH_LIST = "wish_list";
     public static final String CURRENCY = "currency";
     public static final String SHOWAD = "mshowad";
     public static final String USER_AVAILABLE = "user available";
