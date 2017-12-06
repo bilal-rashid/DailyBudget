@@ -66,7 +66,7 @@ public class BigPurchaseAdapter extends RecyclerView.Adapter<BigPurchaseAdapter.
         double completed = (total_amount/item.amount)*100;
         if(completed > 100)
             completed = 100;
-        holder.percentText.setText(completed+" %");
+        holder.percentText.setText((new DecimalFormat("0.0").format(completed))+" % completed");
         holder.progressBar.setProgress((float) completed);
 
 

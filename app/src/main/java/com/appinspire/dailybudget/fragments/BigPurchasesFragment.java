@@ -108,7 +108,7 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
         } else {
 //            mHolder.sErrorContainer.setVisibility(View.GONE);
         }
-        mShowAd = ((objects.size()%3) == 0) && (objects.size()>0);
+        mShowAd = true;
     }
 
     @Override

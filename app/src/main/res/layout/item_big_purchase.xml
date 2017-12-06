@@ -128,14 +128,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/spacing_medium"
                         android:layout_weight="3"
+                        android:layout_marginBottom="@dimen/spacing_small_m"
                         android:gravity="left"
-                        android:text="60%" />
+                        android:text="6" />
 
                     <TextView
                         android:id="@+id/text_amount"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_marginTop="@dimen/spacing_small_m"
                         android:layout_weight="4"
                         android:gravity="right"
                         android:text="650000"
