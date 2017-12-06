@@ -33,10 +33,11 @@ public class MyNumberPickerDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_number_picker);
         numberPicker = (MaterialNumberPicker) findViewById(R.id.number_picker);
-        numberPicker.setValue(10);
+        numberPicker.setValue(20);
         numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(10);
-        numberPicker.setDisplayedValues( new String[] { "10","20","30","40","50","60","70","80","90","100"} );
+        numberPicker.setMaxValue(20);
+        numberPicker.setDisplayedValues( new String[] { "5","10","15","20","25","30","35","40","45","50",
+                                                        "55","60","65","70","75","80","85","90","95","100"} );
         cancelButton = (Button) findViewById(R.id.button_cancel);
         confirmButton = (Button) findViewById(R.id.button_confirm);
         cancelButton.setOnClickListener(onClickListener);

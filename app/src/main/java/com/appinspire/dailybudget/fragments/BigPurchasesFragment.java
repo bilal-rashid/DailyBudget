@@ -15,10 +15,12 @@ import com.appinspire.dailybudget.FrameActivity;
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.BigPurchaseAdapter;
 import com.appinspire.dailybudget.models.BigPurchase;
+import com.appinspire.dailybudget.models.Saving;
 import com.appinspire.dailybudget.toolbox.OnItemClickListener;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.ActivityUtils;
 import com.appinspire.dailybudget.utils.Constants;
+import com.appinspire.dailybudget.utils.Database;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -33,6 +35,7 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
     private ViewHolder mHolder;
     private BigPurchaseAdapter mBigPurchaseAdapter;
     private boolean mShowAd;
+    double mSavings;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,13 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         mHolder = new ViewHolder(view);
         mHolder.fab_Add.setOnClickListener(this);
+        List<Saving> list = Database.getSavingList(getContext());
+        if(list.size()<1) {
+            mSavings = 0;
+        }else {
+            mSavings = list.get(list.size() - 1).savings;
+
+        }
         setupRecyclerView();
         mHolder.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -80,13 +90,13 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
-//        populateData(Database.getIncomeList(getContext()));
+        populateData(Database.getWishList(getContext()));
     }
 
     private void setupRecyclerView() {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mHolder.recyclerView.setLayoutManager(mLayoutManager);
-        mBigPurchaseAdapter = new BigPurchaseAdapter(this);
+        mBigPurchaseAdapter = new BigPurchaseAdapter(this,mSavings);
         mHolder.recyclerView.setAdapter(mBigPurchaseAdapter);
     }
 

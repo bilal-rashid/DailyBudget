@@ -14,15 +14,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 
 import com.appinspire.dailybudget.R;
 import com.appinspire.dailybudget.adapters.SpinnerAdapter;
 import com.appinspire.dailybudget.dialog.MyNumberPickerDialog;
-import com.appinspire.dailybudget.enumerations.ExpenseEnum;
 import com.appinspire.dailybudget.enumerations.SpinnerTypeEnum;
+import com.appinspire.dailybudget.enumerations.WishListEnum;
 import com.appinspire.dailybudget.models.BigPurchase;
-import com.appinspire.dailybudget.models.Expense;
 import com.appinspire.dailybudget.toolbox.ToolbarListener;
 import com.appinspire.dailybudget.utils.AppUtils;
 import com.appinspire.dailybudget.utils.Constants;
@@ -103,8 +101,6 @@ public class AddBigPurchaseFragment extends Fragment implements View.OnClickList
                     //show dialog here
                     mPercentageDialog.show();
                 }
-
-
                 return true;
             }
         });
@@ -136,8 +132,8 @@ public class AddBigPurchaseFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.button_confirm:
                 if (mPercentageDialog.isShowing()) {
-                    mHolder.percentEditText.setText(String.valueOf(mPercentageDialog.numberPicker.getValue()*10)+" %");
-                    Percentage = mPercentageDialog.numberPicker.getValue()*10;
+                    mHolder.percentEditText.setText(String.valueOf(mPercentageDialog.numberPicker.getValue()*5)+" %");
+                    Percentage = mPercentageDialog.numberPicker.getValue()*5;
                     mPercentageDialog.dismiss();
                 }
                 break;
@@ -174,7 +170,8 @@ public class AddBigPurchaseFragment extends Fragment implements View.OnClickList
         mHolder.inputLayoutPercent.setErrorEnabled(false);
         mBigPurchase.tag = mHolder.tagEditText.getText().toString();
         mBigPurchase.percent = Percentage;
-//        Database.saveExpense(getContext(),mBigPurchase);
+        mBigPurchase.completed = false;
+        Database.saveBigPurchase(getContext(),mBigPurchase);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Big Purchase");
         bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, " " + mBigPurchase.type);
@@ -189,14 +186,14 @@ public class AddBigPurchaseFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        mBigPurchase.type = ExpenseEnum.values()[i].getName();
-        mBigPurchase.icon = ExpenseEnum.values()[i].getIconId();
+        mBigPurchase.type = WishListEnum.values()[i].getName();
+        mBigPurchase.icon = WishListEnum.values()[i].getIconId();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-        mBigPurchase.type = ExpenseEnum.values()[0].getName();
-        mBigPurchase.icon = ExpenseEnum.values()[0].getIconId();
+        mBigPurchase.type = WishListEnum.values()[0].getName();
+        mBigPurchase.icon = WishListEnum.values()[0].getIconId();
 
     }
 

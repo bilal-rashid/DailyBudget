@@ -29,9 +29,12 @@ public enum WishListEnum {
 //    TV_BILL("TV BILL",R.drawable.icon_tv_bill),
 //    CREDIT_CARD("CREDIT CARD",R.drawable.icon_credit_card_bill),
 //    INTERNET_BILL("INTERNET BILL",R.drawable.icon_internet_bill),
-    CAR ("CAR",R.drawable.car),
-    BIKE("MOTOR BIKE",R.drawable.motor_bike),
     BICYCLE ("BICYCLE",R.drawable.bicycle),
+    BIKE("MOTOR BIKE",R.drawable.motor_bike),
+    CAR ("CAR",R.drawable.car),
+    HOUSE("House",R.drawable.own_house),
+    Land("Land",R.drawable.land),
+    REAL_ESTATE("Real Estate",R.drawable.real_estate),
 //    VEHICLE_MAINTENANCE ("VEHICLE MAINTENANCE",R.drawable.icon_maintenance),
     OTHER ("OTHER",R.drawable.icon_other_income);
 
