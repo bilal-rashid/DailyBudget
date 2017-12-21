@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,7 +86,9 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
     @Override
     public void onResume() {
         super.onResume();
-        populateData(Database.getExpenseList(getContext()));
+        List<Expense> expenseList = Database.getExpenseList(getContext());
+        Collections.reverse(expenseList);
+        populateData(expenseList);
     }
 
     private void setupRecyclerView() {

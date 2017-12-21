@@ -24,6 +24,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -87,7 +88,9 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
     @Override
     public void onResume() {
         super.onResume();
-        populateData(Database.getIncomeList(getContext()));
+        List<Income> incomeList = Database.getIncomeList(getContext());
+        Collections.reverse(incomeList);
+        populateData(incomeList);
     }
 
     private void setupRecyclerView() {
