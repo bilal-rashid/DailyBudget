@@ -27,6 +27,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.List;
 
+import me.timos.thuanle.fbnativeadadapter.FBNativeAdAdapter;
+
 /**
  * Created by Bilal Rashid on 10/16/2017.
  */
@@ -97,7 +99,10 @@ public class BigPurchasesFragment extends Fragment implements View.OnClickListen
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mHolder.recyclerView.setLayoutManager(mLayoutManager);
         mBigPurchaseAdapter = new BigPurchaseAdapter(this,mSavings);
-        mHolder.recyclerView.setAdapter(mBigPurchaseAdapter);
+        FBNativeAdAdapter fbAdapter = FBNativeAdAdapter.Builder.with(getString(R.string.fb_native), mBigPurchaseAdapter)
+                .adItemIterval(2)
+                .build();
+        mHolder.recyclerView.setAdapter(fbAdapter);
     }
 
     private void populateData(List<BigPurchase> objects) {

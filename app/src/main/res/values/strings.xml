@@ -155,5 +155,7 @@
     <string name="admob_app_id">ca-app-pub-8567160823440243~6793330292</string>
     <string name="admob_banner_id">ca-app-pub-8567160823440243/3873978323</string>
     <string name="admob_interstitial">ca-app-pub-8567160823440243/6852986140</string>
+    <string name="fb_native">829718733864924_829834207186710</string>
+    <!--<string name="fb_native">YOUR_PLACEMENT_ID</string>-->
     <string name="splash_text">Pocket Finance Manager</string>
 </resources>

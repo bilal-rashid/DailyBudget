@@ -27,6 +27,8 @@ import com.google.android.gms.ads.AdView;
 import java.util.Collections;
 import java.util.List;
 
+import me.timos.thuanle.fbnativeadadapter.FBNativeAdAdapter;
+
 /**
  * Created by Bilal Rashid on 10/16/2017.
  */
@@ -95,7 +97,10 @@ public class ExpensesFragment extends Fragment implements View.OnClickListener,O
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mHolder.recyclerView.setLayoutManager(mLayoutManager);
         mExpenseAdapter= new ExpenseAdapter(this);
-        mHolder.recyclerView.setAdapter(mExpenseAdapter);
+        FBNativeAdAdapter fbAdapter = FBNativeAdAdapter.Builder.with(getString(R.string.fb_native), mExpenseAdapter)
+                .adItemIterval(5)
+                .build();
+        mHolder.recyclerView.setAdapter(fbAdapter);
     }
     private void populateData(List<Expense> objects) {
         mExpenseAdapter.addAll(objects);

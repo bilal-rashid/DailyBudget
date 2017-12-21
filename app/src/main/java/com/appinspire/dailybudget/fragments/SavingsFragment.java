@@ -29,6 +29,8 @@ import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 
+import me.timos.thuanle.fbnativeadadapter.FBNativeAdAdapter;
+
 /**
  * Created by Bilal Rashid on 10/16/2017.
  */
@@ -94,7 +96,10 @@ public class SavingsFragment extends Fragment implements View.OnClickListener,On
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mHolder.historyRecycler.setLayoutManager(mLayoutManager);
         mHistoryAdapter = new HistoryAdapter(this);
-        mHolder.historyRecycler.setAdapter(mHistoryAdapter);
+        FBNativeAdAdapter fbAdapter = FBNativeAdAdapter.Builder.with(getString(R.string.fb_native), mHistoryAdapter)
+                .adItemIterval(4)
+                .build();
+        mHolder.historyRecycler.setAdapter(fbAdapter);
     }
     private void populateData(List<Saving> objects) {
         mHistoryAdapter.addAll(objects);

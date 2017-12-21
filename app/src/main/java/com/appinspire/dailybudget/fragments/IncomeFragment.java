@@ -27,6 +27,8 @@ import com.google.android.gms.ads.AdView;
 import java.util.Collections;
 import java.util.List;
 
+import me.timos.thuanle.fbnativeadadapter.FBNativeAdAdapter;
+
 /**
  * Created by Bilal Rashid on 10/16/2017.
  */
@@ -95,9 +97,13 @@ public class IncomeFragment extends Fragment implements View.OnClickListener ,On
 
     private void setupRecyclerView() {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+
         mHolder.recyclerView.setLayoutManager(mLayoutManager);
         mIncomeAdapter = new IncomeAdapter(this);
-        mHolder.recyclerView.setAdapter(mIncomeAdapter);
+        FBNativeAdAdapter fbAdapter = FBNativeAdAdapter.Builder.with(getString(R.string.fb_native), mIncomeAdapter)
+                .adItemIterval(3)
+                .build();
+        mHolder.recyclerView.setAdapter(fbAdapter);
     }
 
     private void populateData(List<Income> objects) {
