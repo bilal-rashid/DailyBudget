@@ -19,6 +19,7 @@ import com.appinspire.dailybudget.utils.Constants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.kobakei.ratethisapp.RateThisApp;
 
 /**
  * Created by Bilal Rashid on 10/10/2017.
@@ -70,6 +71,13 @@ public class HomeActivity extends AppCompatActivity implements ToolbarListener {
         }
 //        if (!EventBus.getDefault().isRegistered(this))
 //            EventBus.getDefault().register(this);
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+
+        RateThisApp.Config config = new RateThisApp.Config(2, 2);
+        RateThisApp.init(config);
+        RateThisApp.showRateDialogIfNeeded(this);
+
     }
 
     public void addFragment(final Fragment fragment) {
